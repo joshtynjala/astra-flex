@@ -107,7 +107,9 @@ package com.yahoo.astra.mx.skins.halo
 			var dropdownBorderColor:Number = this.getStyle("dropdownBorderColor");
 			var fillAlphas:Array = this.getStyle("fillAlphas");
 			var fillColors:Array = this.getStyle("fillColors");
-			this.styleManager.getColorNames(fillColors);
+			
+			//TODO: when dropping Flex 3 support, change to this.styleManager
+			StyleManager.getColorNames(fillColors);
 			var highlightAlphas:Array = this.getStyle("highlightAlphas");		
 			var themeColor:uint = this.getStyle("themeColor");
 				

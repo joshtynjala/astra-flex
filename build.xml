@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="astra-flex" default="build" basedir=".">
+
+	<!-- Create *.local.properties files to override properties. -->
+	<property file="./sdk.local.properties"/>
+	<property file="./sdk.properties"/>
+	
+	<property file="./build.local.properties"/>
+	<property file="./build.properties"/>
+	
+	<target name="build" depends="prepare,build-lib,cleanup"/>
+	<!-- TODO: add build-all to create documentation and examples -->
+	
+	<target name="prepare">
+		<!-- delete old output -->
+		<delete dir="${output}" includeemptydirs="true"/>
+		<mkdir dir="${output}"/>
+	</target>
+
+	<target name="cleanup">
+	</target>
+	
+	<target name="build-lib">
+		<java jar="${compc}" fork="true" failonerror="true">
+			<arg line="+flexlib='${flexframework.root}'"/>
+			<arg line="--namespace+=${library.mxmlNamespace},manifest.xml"/>
+			<arg line="--source-path+='source'"/>
+			<arg line="--include-namespaces+=${library.mxmlNamespace}"/>
+			<arg line="--include-classes+=com.yahoo.astra.mx.AstraFlexDependencies"/>
+			<arg line="--include-stylesheet defaults.css source/defaults.css"/>
+			<arg line="--external-library-path+='${flexframework.lib}'"/>
+			<arg line="--output '${build.output}/${library.shortName}.swc'"/>
+		</java>
+	</target>
+	
+</project>

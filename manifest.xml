@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <componentPackage>
+	<component id="AutoCompleteManager" class="com.yahoo.astra.mx.managers.AutoCompleteManager"/>
 	<component id="ColorPlaneAndSliderPicker" class="com.yahoo.astra.mx.controls.ColorPlaneAndSliderPicker"/>
 	<component id="ColorSliderPicker" class="com.yahoo.astra.mx.controls.ColorSliderPicker"/>
 	<component id="DropDownColorPicker" class="com.yahoo.astra.mx.controls.DropDownColorPicker"/>

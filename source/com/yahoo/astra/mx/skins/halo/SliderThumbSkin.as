@@ -7,10 +7,11 @@ package com.yahoo.astra.mx.skins.halo
 
 	import flash.display.GradientType;
 	import flash.display.Graphics;
+	
 	import mx.skins.Border;
+	import mx.skins.halo.HaloColors;
 	import mx.styles.StyleManager;
 	import mx.utils.ColorUtil;
-	import mx.skins.halo.HaloColors;
 	
 	/**
 	 *  The skin for all the states of a thumb in a Slider.
@@ -106,7 +107,9 @@ package com.yahoo.astra.mx.skins.halo
 			var borderColor:uint = getStyle("borderColor");
 			var fillAlphas:Array = getStyle("fillAlphas");
 			var fillColors:Array = getStyle("fillColors");
-			this.styleManager.getColorNames(fillColors);
+			
+			//TODO: when dropping Flex 3 support, change to this.styleManager
+			StyleManager.getColorNames(fillColors);
 			var themeColor:uint = getStyle("themeColor");
 			
 			// Derivative styles.

@@ -1,7 +1,7 @@
 /* CSS file */
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
-@namespace yahoo "http://www.yahoo.com/2006/mxml";
+@namespace yahoo "http://www.yahoo.com/astra/2006/mxml";
 
 yahoo|ColorPlaneAndSliderPicker
 {
@@ -19,18 +19,17 @@ yahoo|DropDownColorPicker
 	closeDuration: 250;
 	dropDownGap: 4;
 	openDuration: 250;
-	viewerStyleName: yahoo_DropDownColorPicker_viewerStyleName;
-	pickerStyleName: yahoo_DropDownColorPicker_pickerStyleName;
+	viewerStyleName: yahoo-DropDownColorPicker-viewerStyleName;
+	pickerStyleName: yahoo-DropDownColorPicker-pickerStyleName;
 }
 
-.yahoo_DropDownColorPicker_viewerStyleName
+.yahoo-DropDownColorPicker-viewerStyleName
 {
 	skin: ClassReference("com.yahoo.astra.mx.skins.halo.EditableColorViewerSkin");
 }
 
-.yahoo_DropDownColorPicker_pickerStyleName
+.yahoo-DropDownColorPicker-pickerStyleName
 {
-	
 }
 
 yahoo|IPv4AddressInput
@@ -79,7 +78,7 @@ yahoo|AdvancedHSBColorWheelPicker
 yahoo|BaseColorPickerDropDown
 {
 	backgroundColor: #e5e6e7;
-	borderColor: #a5a9aE;
+	borderColor: #a5a9ae;
 	borderSkin: ClassReference("mx.skins.halo.SwatchPanelSkin");
 	fontSize: 11;
 	highlightColor: #ffffff;
