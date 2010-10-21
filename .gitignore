@@ -1,0 +1,8 @@
+output
+bin
+.settings
+.actionScriptProperties
+.flexLibProperties
+.project
+*.swf
+*.swc
