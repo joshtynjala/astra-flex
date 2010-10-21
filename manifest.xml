@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<componentPackage>
+	<component id="ColorPlaneAndSliderPicker" class="com.yahoo.astra.mx.controls.ColorPlaneAndSliderPicker"/>
+	<component id="ColorSliderPicker" class="com.yahoo.astra.mx.controls.ColorSliderPicker"/>
+	<component id="DropDownColorPicker" class="com.yahoo.astra.mx.controls.DropDownColorPicker"/>
+	<component id="IPv4AddressInput" class="com.yahoo.astra.mx.controls.IPv4AddressInput"/>
+	<component id="TimeInput" class="com.yahoo.astra.mx.controls.TimeInput"/>
+	<component id="TimeStepper" class="com.yahoo.astra.mx.controls.TimeStepper"/>
+	<component id="AdvancedColorPickerDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.AdvancedColorPickerDropDown"/>
+	<component id="AdvancedHSBColorWheelPicker" class="com.yahoo.astra.mx.controls.colorPickerClasses.AdvancedHSBColorWheelPicker"/>
+	<component id="BaseColorPickerDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.BaseColorPickerDropDown"/>
+	<component id="ColorPlane" class="com.yahoo.astra.mx.controls.colorPickerClasses.ColorPlane"/>
+	<component id="ColorSelectionViewer" class="com.yahoo.astra.mx.controls.colorPickerClasses.ColorSelectionViewer"/>
+	<component id="ColorSlider" class="com.yahoo.astra.mx.controls.colorPickerClasses.ColorSlider"/>
+	<component id="ColorSliderDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.ColorSliderDropDown"/>
+	<component id="ColorWheelPicker" class="com.yahoo.astra.mx.controls.colorPickerClasses.ColorWheelPicker"/>
+	<component id="DefaultColorViewer" class="com.yahoo.astra.mx.controls.colorPickerClasses.DefaultColorViewer"/>
+	<component id="DisplayObjectColorPickerDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.DisplayObjectColorPickerDropDown"/>
+	<component id="DividedColorViewer" class="com.yahoo.astra.mx.controls.colorPickerClasses.DividedColorViewer"/>
+	<component id="HexColorInput" class="com.yahoo.astra.mx.controls.colorPickerClasses.HexColorInput"/>
+	<component id="HexColorViewer" class="com.yahoo.astra.mx.controls.colorPickerClasses.HexColorViewer"/>
+	<component id="HSBColorWheel" class="com.yahoo.astra.mx.controls.colorPickerClasses.HSBColorWheel"/>
+	<component id="HSBColorWheel2" class="com.yahoo.astra.mx.controls.colorPickerClasses.HSBColorWheel2"/>
+	<component id="SwatchPicker" class="com.yahoo.astra.mx.controls.colorPickerClasses.SwatchPicker"/>
+	<component id="SwatchPickerDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.SwatchPickerDropDown"/>
+	<component id="BaseMultiFieldInput" class="com.yahoo.astra.mx.controls.inputClasses.BaseMultiFieldInput"/>
+</componentPackage>

@@ -4,8 +4,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 */
 package com.yahoo.astra.mx.controls.colorPickerClasses
 {
-	import com.yahoo.astra.mx.skins.halo.SwatchHighlightSkin;
-	
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -19,9 +17,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerComponent;
-	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	import mx.styles.StyleManager;
 	
 	//--------------------------------------
 	//  Events
@@ -56,40 +52,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	 */
 	public class SwatchPicker extends UIComponent implements IColorPicker, IFocusManagerComponent
 	{
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * 
-		 * Sets the initial style values for new instances of this control.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("SwatchPicker");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.columnCount = 20;
-				this.borderThickness = 1;
-				this.swatchWidth = 12;
-				this.swatchHeight = 12;
-				this.horizontalGap = 1;
-				this.verticalGap = 1;
-				this.backgroundColor = 0x000000;
-				this.swatchHighlightSkin = SwatchHighlightSkin;
-				this.swatchHighlightColor = 0xffffff;
-			};
-			
-			StyleManager.setStyleDeclaration("SwatchPicker", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor

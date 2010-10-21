@@ -57,36 +57,10 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 	 * two-dimensional picker.
 	 * 
 	 * @see com.yahoo.astra.utils.HSBColor
+	 * @author Josh Tynjala
 	 */
 	public class ColorWheelPicker extends UIComponent implements IColorPicker
 	{
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default styles for controls of this type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorWheelPicker");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.selectionIndicatorSkin = ColorSelectionIndicator;
-				this.selectionIndicatorSize = 10;
-				this.centerColorRadius = 5;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorWheelPicker", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor

@@ -18,8 +18,6 @@ package com.yahoo.astra.mx.controls
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerComponent;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
 	import mx.styles.StyleProxy;
 	
 	use namespace yahoo_mx_internal;
@@ -50,15 +48,6 @@ package com.yahoo.astra.mx.controls
 	 */
 	[Event(name="itemRollOver", type="mx.events.ColorPickerEvent")]
 	
-	//--------------------------------------
-	//  Other Metadata
-	//--------------------------------------
-	
-	//The [AccessibilityClass] meta tag will let the compiler know which class will serve 
-	//as the accessibility implementation for this component.
-	//[AccessibilityClass(implementation="com.yahoo.astra.mx.accessibility.ColorSliderPickerAccImpl")]
-	
-	
 	/**
 	 * A set of color sliders representing the components in a colorspace.
 	 * 
@@ -79,33 +68,6 @@ package com.yahoo.astra.mx.controls
 		 * number of components in each colorspace.
 		 */
 		private static const COLOR_SPACE_COMPONENT_COUNT:Object = {rgb: 3, hsb: 3, cmy: 3, cmyk: 4};
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * 
-		 * Sets the initial style values for new instances of this control.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorSliderPicker");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.sliderDirection = "vertical";
-				this.spacing = 10;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorSliderPicker", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 
 	//--------------------------------------

@@ -41,32 +41,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 		private static const DEFAULT_MEASURED_RADIUS:Number = 160;
 		
 	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-		
-		/**
-		 * @private
-		 * Sets the default styles for this control type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("HSBColorWheel2");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.innerColorSize = 5;
-				this.outerColorSize = 5;
-			};
-			
-			StyleManager.setStyleDeclaration("HSBColorWheel2", styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 	

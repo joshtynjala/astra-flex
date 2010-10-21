@@ -30,38 +30,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	{
 		
 	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-		
-		/**
-		 * @private
-		 * Sets the default style values for this control type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("HexColorViewer");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.skin = DropDownViewerSkin;
-				this.cornerRadius = 5;
-				this.focusRoundedCorners = "tl bl tr br";
-				this.fontWeight = "bold";
-				this.fillColors = [];
-				this.fillAlphas = [0, 0, 0, 0];
-				this.paddingLeft = 5;
-				this.paddingRight = 27;
-			};
-			
-			StyleManager.setStyleDeclaration("HexColorViewer", styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 		

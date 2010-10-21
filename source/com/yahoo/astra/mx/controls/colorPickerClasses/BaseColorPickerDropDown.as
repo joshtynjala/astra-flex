@@ -4,8 +4,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 */
 package com.yahoo.astra.mx.controls.colorPickerClasses
 {
-	import com.yahoo.astra.mx.skins.halo.ColorViewerSimpleSkin;
-	
 	import flash.display.DisplayObject;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -15,10 +13,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerContainer;
-	import mx.skins.halo.SwatchPanelSkin;
-	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	import mx.styles.StyleManager;
 	import mx.styles.StyleProxy;
 	
 	//--------------------------------------
@@ -62,47 +57,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	 */
 	public class BaseColorPickerDropDown extends UIComponent implements IColorPicker, IFocusManagerContainer
 	{
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for this control type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("BaseColorPickerDropDown");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.backgroundColor = 0xe5e6e7;
-				this.borderColor = 0xa5a9aE;
-				this.borderSkin = SwatchPanelSkin;
-				this.fontSize = 11;
-				this.highlightColor = 0xffffff;
-				this.paddingLeft = 5;
-				this.paddingTop = 5;
-				this.paddingRight = 5;
-				this.paddingBottom = 5;
-				this.shadowColor = 0x4d555e;
-				this.showColorViewer = true;
-				this.showColorInput = true;
-				this.verticalGap = 4;
-				this.horizontalGap = 4;
-				this.previewWidth = 45;
-				this.previewHeight = 22;
-				this.previewSkin = ColorViewerSimpleSkin;
-			};
-			
-			StyleManager.setStyleDeclaration("BaseColorPickerDropDown", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor
@@ -221,6 +175,22 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 * Used for measurement and positioning.
 		 */
 		protected var yPositionOffset:Number = 0;
+		
+		/**
+		 * @inheritDoc
+		 */
+		public function get defaultButton():IFlexDisplayObject
+		{
+			return null;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set defaultButton(value:IFlexDisplayObject):void
+		{
+			
+		}
 		
 	//--------------------------------------
 	//  Public Methods

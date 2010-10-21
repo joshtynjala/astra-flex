@@ -129,64 +129,6 @@ package com.yahoo.astra.mx.controls
 	{
 		
 	//--------------------------------------
-	//  Static Properties
-	//--------------------------------------
-		
-		/**
-		 * @private
-		 * The default value used for the viewerStyleName style.
-		 */
-		private static const DEFAULT_VIEWER_STYLE_NAME:String = "yahoo_DropDownColorPicker_viewerStyleName";
-		
-		/**
-		 * @private
-		 * The default value used for the pickerStyleName style.
-		 */
-		private static const DEFAULT_PICKER_STYLE_NAME:String = "yahoo_DropDownColorPicker_pickerStyleName";
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for new instances of this control.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("DropDownColorPicker");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			//TODO: Add openEasingFunction and closeEasingFunction
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.closeDuration = 250;
-				this.dropDownGap = 4;
-				this.openDuration = 250;
-				this.viewerStyleName = DEFAULT_VIEWER_STYLE_NAME;
-				this.pickerStyleName = DEFAULT_PICKER_STYLE_NAME;
-			};
-			
-			StyleManager.setStyleDeclaration("DropDownColorPicker", styleDeclaration, false);
-			
-			styleDeclaration = StyleManager.getStyleDeclaration("." + DEFAULT_VIEWER_STYLE_NAME);
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.skin = EditableColorViewerSkin;
-			}
-			StyleManager.setStyleDeclaration("." + DEFAULT_VIEWER_STYLE_NAME, styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 		

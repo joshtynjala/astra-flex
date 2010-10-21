@@ -34,36 +34,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	{
 		
 	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Set the default values for controls of this type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorSliderDropDown");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.paddingLeft = 10;
-				this.paddingRight = 10;
-				this.paddingTop = 10;
-				this.paddingBottom = 10;
-				this.sliderDirection = "vertical";
-				this.verticalGap = 10;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorSliderDropDown", styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 	

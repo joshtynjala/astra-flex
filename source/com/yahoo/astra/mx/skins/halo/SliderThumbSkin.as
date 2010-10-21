@@ -106,7 +106,7 @@ package com.yahoo.astra.mx.skins.halo
 			var borderColor:uint = getStyle("borderColor");
 			var fillAlphas:Array = getStyle("fillAlphas");
 			var fillColors:Array = getStyle("fillColors");
-			StyleManager.getColorNames(fillColors);
+			this.styleManager.getColorNames(fillColors);
 			var themeColor:uint = getStyle("themeColor");
 			
 			// Derivative styles.

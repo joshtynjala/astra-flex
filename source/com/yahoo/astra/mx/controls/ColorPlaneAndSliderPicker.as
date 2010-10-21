@@ -17,8 +17,6 @@ package com.yahoo.astra.mx.controls
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerComponent;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
 	
 	use namespace yahoo_mx_internal;
 	
@@ -74,31 +72,6 @@ package com.yahoo.astra.mx.controls
 		 * The default width of the ColorSlider.
 		 */
 		private static const DEFAULT_SLIDER_WIDTH:Number = 40;
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Set the default styles for new instances of this control.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorPlaneAndSliderPicker");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.horizontalGap = 5;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorPlaneAndSliderPicker", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor

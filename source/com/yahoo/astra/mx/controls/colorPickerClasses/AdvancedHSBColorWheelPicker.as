@@ -5,10 +5,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 ﻿package com.yahoo.astra.mx.controls.colorPickerClasses
 {
 	import com.yahoo.astra.animation.Animation;
-	import com.yahoo.astra.mx.controls.colorPickerClasses.ColorSelectionViewer;
-	import com.yahoo.astra.mx.controls.colorPickerClasses.HSBColorWheel2;
-	import com.yahoo.astra.mx.controls.colorPickerClasses.IColorPicker;
-	import com.yahoo.astra.mx.controls.colorPickerClasses.IColorViewer;
 	import com.yahoo.astra.mx.core.yahoo_mx_internal;
 	import com.yahoo.astra.utils.ColorUtil;
 	import com.yahoo.astra.utils.HSBColor;
@@ -23,9 +19,7 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 	import mx.core.UIComponent;
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
-	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	import mx.styles.StyleManager;
 	import mx.styles.StyleProxy;
 
 	use namespace yahoo_mx_internal;
@@ -73,35 +67,7 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 	 * @author Josh Tynjala
 	 */
 	public class AdvancedHSBColorWheelPicker extends UIComponent implements IColorPicker
-	{	
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets default style values for controls of this type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("AdvancedHSBColorWheelPicker");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.innerColorSize = 5;
-				this.outerColorSize = 5;
-				this.selectionIndicatorSkin = ColorSelectionViewer;
-				this.selectionIndicatorSize = 20;
-			};
-			
-			StyleManager.setStyleDeclaration("AdvancedHSBColorWheelPicker", styleDeclaration, false);
-		}
-		initializeStyles();
+	{
 		
 	//--------------------------------------
 	//  Constructor

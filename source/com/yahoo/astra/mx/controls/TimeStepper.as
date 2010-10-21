@@ -19,10 +19,6 @@ package com.yahoo.astra.mx.controls
 	import mx.core.mx_internal;
 	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerComponent;
-	import mx.skins.halo.NumericStepperDownSkin;
-	import mx.skins.halo.NumericStepperUpSkin;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
 	import mx.styles.StyleProxy;
 
 	use namespace mx_internal;
@@ -181,39 +177,6 @@ package com.yahoo.astra.mx.controls
 	//--------------------------------------
 		
 		private static const AMPM:String = "ampm";
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-		
-		/**
-		 * @private
-		 * Set the default styles.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("TimeStepper");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.useTwelveHourFormat = true;
-				this.showAMPM = true;
-				this.showSeconds = true;
-				
-				this.cornerRadius = 5;
-				this.downArrowSkin = NumericStepperDownSkin;
-				this.focusRoundedCorners = "tr br"; /* Only round the right corners of the focus rect */
-				this.upArrowSkin = NumericStepperUpSkin;
-			};
-			
-			StyleManager.setStyleDeclaration("TimeStepper", styleDeclaration, false);
-			
-		}
-		initializeStyles();
 		
 		
 	//--------------------------------------

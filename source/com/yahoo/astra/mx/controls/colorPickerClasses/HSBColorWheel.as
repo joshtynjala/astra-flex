@@ -5,7 +5,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 ﻿package com.yahoo.astra.mx.controls.colorPickerClasses
 {
 	import com.yahoo.astra.utils.HSBColor;
-	import com.yahoo.astra.utils.PointUtil;
 	
 	import flash.display.GradientType;
 	import flash.display.InterpolationMethod;

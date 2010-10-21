@@ -77,36 +77,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		private static const DEFAULT_PLANE_AND_SLIDER_HEIGHT:Number = 250;
 		
 	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for this control type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("AdvancedColorPickerDropDown");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.paddingLeft = 10;
-				this.paddingRight = 10;
-				this.paddingTop = 10;
-				this.paddingBottom = 10;
-				this.horizontalGap = 4;
-				this.verticalGap = 8;
-			};
-			
-			StyleManager.setStyleDeclaration("AdvancedColorPickerDropDown", styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 	

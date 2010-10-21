@@ -5,9 +5,7 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 package com.yahoo.astra.mx.controls.colorPickerClasses
 {
 	import com.yahoo.astra.animation.Animation;
-	import com.yahoo.astra.mx.controls.colorPickerClasses.ColorSliderThumb;
 	import com.yahoo.astra.mx.core.yahoo_mx_internal;
-	import com.yahoo.astra.mx.skins.halo.SliderThumbSkin;
 	import com.yahoo.astra.utils.CMYColor;
 	import com.yahoo.astra.utils.CMYKColor;
 	import com.yahoo.astra.utils.ColorSpace;
@@ -15,19 +13,20 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import com.yahoo.astra.utils.HSBColor;
 	import com.yahoo.astra.utils.RGBColor;
 	
+	import flash.display.DisplayObject;
 	import flash.display.GradientType;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	
 	import mx.controls.Button;
 	import mx.core.EdgeMetrics;
+	import mx.core.IFlexDisplayObject;
+	import mx.core.IRectangularBorder;
 	import mx.core.UIComponent;
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
-	import mx.managers.IFocusManagerComponent;
 	import mx.skins.RectangularBorder;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
+	import mx.styles.ISimpleStyleClient;
 	import mx.styles.StyleProxy;
 	
 	use namespace yahoo_mx_internal;
@@ -85,33 +84,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		private static const DEFAULT_MEASURED_SIZE:Number = 36;
 		
 	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for controls of this type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorSlider");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.dataTipPrecision = 0;
-				this.thumbSkin = SliderThumbSkin;
-				this.thumbSize = 10;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorSlider", styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 	
@@ -135,7 +107,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		/**
 		 * The border of the color slider.
 		 */
-		protected var border:RectangularBorder;
+		protected var border:IFlexDisplayObject;
 		
 		/**
 		 * The first thumb button.
@@ -465,8 +437,11 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				if(borderSkin)
 				{
 					this.border = new borderSkin();
-					this.border.styleName = this;
-					this.addChild(this.border);
+					if(this.border is ISimpleStyleClient)
+					{
+						ISimpleStyleClient(this.border).styleName = this;
+					}
+					this.addChild(DisplayObject(this.border));
 				}
 			}
 			
@@ -619,10 +594,14 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				this.border.x = metrics.left;
 				this.border.y = metrics.top;
 				this.border.setActualSize(unscaledWidth - metrics.left - metrics.right, unscaledHeight - metrics.top - metrics.bottom);
-				metrics.left += this.border.borderMetrics.left;
-				metrics.right += this.border.borderMetrics.right;
-				metrics.top += this.border.borderMetrics.top;
-				metrics.bottom += this.border.borderMetrics.bottom;
+				if(this.border is IRectangularBorder)
+				{
+					var rectBorder:IRectangularBorder = IRectangularBorder(this.border);
+					metrics.left += rectBorder.borderMetrics.left;
+					metrics.right += rectBorder.borderMetrics.right;
+					metrics.top += rectBorder.borderMetrics.top;
+					metrics.bottom += rectBorder.borderMetrics.bottom;
+				}
 			}
 			
 			var gradientWidth:Number = unscaledWidth - metrics.left - metrics.right;
@@ -763,12 +742,13 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				metrics.bottom = this.thumb2.width;
 			}
 			
-			if(this.border)
+			if(this.border is IRectangularBorder)
 			{
-				metrics.left += this.border.borderMetrics.left;
-				metrics.right += this.border.borderMetrics.right;
-				metrics.top += this.border.borderMetrics.top;
-				metrics.bottom += this.border.borderMetrics.bottom;
+				var rectBorder:IRectangularBorder = IRectangularBorder(this.border);
+				metrics.left += rectBorder.borderMetrics.left;
+				metrics.right += rectBorder.borderMetrics.right;
+				metrics.top += rectBorder.borderMetrics.top;
+				metrics.bottom += rectBorder.borderMetrics.bottom;
 			}
 			return metrics;
 		}

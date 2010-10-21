@@ -29,9 +29,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import mx.core.UIComponent;
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
-	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	import mx.styles.StyleManager;
 
 	use namespace yahoo_mx_internal;
 	
@@ -92,32 +90,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 * The default height value of the plane.
 		 */
 		private static const DEFAULT_MEASURED_HEIGHT:Number = 160;
-	
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets default style values for controls of this type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorPlane");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.selectionIndicatorSkin = ColorSelectionIndicator;
-				this.selectionIndicatorSize = 10;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorPlane", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor

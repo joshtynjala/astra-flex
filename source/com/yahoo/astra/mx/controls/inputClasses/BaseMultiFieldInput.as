@@ -11,7 +11,6 @@ package com.yahoo.astra.mx.controls.inputClasses
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.text.TextFieldType;
-	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
 	
 	import mx.core.EdgeMetrics;
@@ -22,9 +21,7 @@ package com.yahoo.astra.mx.controls.inputClasses
 	import mx.core.UITextField;
 	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerComponent;
-	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	import mx.styles.StyleManager;
 	
 	use namespace yahoo_mx_internal;
 
@@ -79,34 +76,6 @@ package com.yahoo.astra.mx.controls.inputClasses
 	 */
 	public class BaseMultiFieldInput extends UIComponent implements IFocusManagerComponent
 	{
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for this control.
-		 */
-		public static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("BaseMultiFieldInput");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.backgroundColor = 0xffffff;
-				this.backgroundDisabledColor = 0xdddddd;
-				this.textAlign = TextFormatAlign.CENTER;
-				//other styles are based on the framework defaults
-			};
-			
-			StyleManager.setStyleDeclaration("BaseMultiFieldInput", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor

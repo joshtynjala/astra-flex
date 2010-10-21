@@ -5,9 +5,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 package com.yahoo.astra.mx.controls.colorPickerClasses
 {
 	import mx.core.UIComponent;
-	import com.yahoo.astra.mx.controls.colorPickerClasses.IColorViewer;
-	import mx.styles.StyleManager;
-	import mx.styles.CSSStyleDeclaration;
 
 	/**
 	 * An advanced color selection indicators that also displays a color.
@@ -16,32 +13,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	 */
 	public class ColorSelectionViewer extends UIComponent implements IColorViewer
 	{
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for controls of this type.
-		 */
-		private static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("ColorSelectionViewer");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.borderColor = 0x000000;
-				this.borderThickness = 2;
-			};
-			
-			StyleManager.setStyleDeclaration("ColorSelectionViewer", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 	//--------------------------------------
 	//  Constructor

@@ -18,8 +18,6 @@ package com.yahoo.astra.mx.controls
 	import mx.core.IBorder;
 	import mx.core.UITextField;
 	import mx.events.FlexEvent;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
 	
 	//--------------------------------------
 	//  Events
@@ -102,36 +100,6 @@ package com.yahoo.astra.mx.controls
 	 */
 	public class TimeInput extends BaseMultiFieldInput
 	{
-		
-	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Sets the default style values for this control.
-		 */
-		public static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("TimeInput");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.displayTwoDigitHoursValue = false;
-				this.useTwelveHourFormat = true;
-				this.AMText = "AM";
-				this.PMText = "PM";
-				this.showAMPM = true;
-				this.showSeconds = true;
-			};
-			
-			StyleManager.setStyleDeclaration("TimeInput", styleDeclaration, false);
-		}
-		initializeStyles();
 		
 		
 	//--------------------------------------

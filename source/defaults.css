@@ -1,0 +1,186 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace yahoo "http://www.yahoo.com/2006/mxml";
+
+yahoo|ColorPlaneAndSliderPicker
+{
+	horizontalGap: 5;
+}
+
+yahoo|ColorSliderPicker
+{
+	sliderDirection: vertical;
+	spacing: 10;
+}
+
+yahoo|DropDownColorPicker
+{
+	closeDuration: 250;
+	dropDownGap: 4;
+	openDuration: 250;
+	viewerStyleName: yahoo_DropDownColorPicker_viewerStyleName;
+	pickerStyleName: yahoo_DropDownColorPicker_pickerStyleName;
+}
+
+.yahoo_DropDownColorPicker_viewerStyleName
+{
+	skin: ClassReference("com.yahoo.astra.mx.skins.halo.EditableColorViewerSkin");
+}
+
+.yahoo_DropDownColorPicker_pickerStyleName
+{
+	
+}
+
+yahoo|IPv4AddressInput
+{
+}
+
+yahoo|TimeInput
+{
+	displayTwoDigitHoursValue: false;
+	useTwelveHourFormat: true;
+	AMText: AM;
+	PMText: PM;
+	showAMPM: true;
+	showSeconds: true;
+}
+
+yahoo|TimeStepper
+{
+	useTwelveHourFormat: true;
+	showAMPM: true;
+	showSeconds: true;
+	cornerRadius: 5;
+	downArrowSkin: ClassReference("mx.skins.halo.NumericStepperDownSkin");
+	focusRoundedCorners: "tr br"; /* Only round the right corners of the focus rect */
+	upArrowSkin: ClassReference("mx.skins.halo.NumericStepperUpSkin");
+}
+
+yahoo|AdvancedColorPickerDropDown
+{
+	paddingLeft: 10;
+	paddingRight: 10;
+	paddingTop: 10;
+	paddingBottom: 10;
+	horizontalGap: 4;
+	verticalGap: 8;
+}
+
+yahoo|AdvancedHSBColorWheelPicker
+{
+	innerColorSize: 5;
+	outerColorSize: 5;
+	selectionIndicatorSkin: ClassReference("com.yahoo.astra.mx.controls.colorPickerClasses.ColorSelectionViewer");
+	selectionIndicatorSize: 20;
+}
+
+yahoo|BaseColorPickerDropDown
+{
+	backgroundColor: #e5e6e7;
+	borderColor: #a5a9aE;
+	borderSkin: ClassReference("mx.skins.halo.SwatchPanelSkin");
+	fontSize: 11;
+	highlightColor: #ffffff;
+	paddingLeft: 5;
+	paddingTop: 5;
+	paddingRight: 5;
+	paddingBottom: 5;
+	shadowColor: #4d555e;
+	showColorViewer: true;
+	showColorInput: true;
+	verticalGap: 4;
+	horizontalGap: 4;
+	previewWidth: 45;
+	previewHeight: 22;
+	previewSkin: ClassReference("com.yahoo.astra.mx.skins.halo.ColorViewerSimpleSkin");
+}
+
+yahoo|BaseMultiFieldInput
+{
+	backgroundColor: #ffffff;
+	backgroundDisabledColor: #dddddd;
+	textAlign: center;
+}
+
+yahoo|ColorPlane
+{
+	selectionIndicatorSkin: ClassReference("com.yahoo.astra.mx.controls.colorPickerClasses.ColorSelectionIndicator");
+	selectionIndicatorSize: 10;
+	contentBackgroundColor: #ffffff;
+	contentBackgroundAlpha: 0;
+}
+
+yahoo|ColorSelectionViewer
+{
+	borderColor: #000000;
+	borderThickness: 2;
+}
+
+yahoo|ColorSlider
+{
+	dataTipPrecision: 0;
+	thumbSkin: ClassReference("com.yahoo.astra.mx.skins.halo.SliderThumbSkin");
+	thumbSize: 10;
+	contentBackgroundColor: #ffffff;
+	contentBackgroundAlpha: 0;
+}
+
+yahoo|ColorSliderDropDown
+{
+	paddingLeft: 10;
+	paddingRight: 10;
+	paddingTop: 10;
+	paddingBottom: 10;
+	sliderDirection: vertical;
+	verticalGap: 10;
+}
+
+yahoo|ColorWheelPicker
+{
+	selectionIndicatorSkin: ClassReference("com.yahoo.astra.mx.controls.colorPickerClasses.ColorSelectionIndicator");
+	selectionIndicatorSize: 10;
+	centerColorRadius: 5;
+}
+
+yahoo|DefaultColorViewer
+{
+	skin: ClassReference("com.yahoo.astra.mx.skins.halo.ColorViewerSkin");
+}
+
+yahoo|HexColorInput
+{
+	backgroundColor: #ffffff;
+}
+
+yahoo|HexColorViewer
+{
+	skin: ClassReference("com.yahoo.astra.mx.skins.halo.DropDownViewerSkin");
+	cornerRadius: 5;
+	focusRoundedCorners: "tl bl tr br";
+	fontWeight: "bold";
+	fillColors: 0, 0, 0, 0;
+	fillAlphas: 0, 0, 0, 0;
+	paddingLeft: 5;
+	paddingRight: 27;
+}
+
+yahoo|HSBColorWheel2
+{
+	innerColorSize: 5;
+	outerColorSize: 5;
+}
+
+yahoo|SwatchPicker
+{
+	columnCount: 20;
+	borderThickness: 1;
+	swatchWidth: 12;
+	swatchHeight: 12;
+	horizontalGap: 1;
+	verticalGap: 1;
+	backgroundColor: #000000;
+	swatchHighlightSkin: ClassReference("com.yahoo.astra.mx.skins.halo.SwatchHighlightSkin");
+	swatchHighlightColor: #ffffff;
+}

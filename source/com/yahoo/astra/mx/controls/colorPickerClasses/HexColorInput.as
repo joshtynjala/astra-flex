@@ -67,32 +67,6 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		private static const DEFAULT_MEASURED_WIDTH:Number = 50;
 		
 	//--------------------------------------
-	//  Static Methods
-	//--------------------------------------
-	
-		/**
-		 * @private
-		 * Set up the default styles.
-		 */
-		public static function initializeStyles():void
-		{
-			var styleDeclaration:CSSStyleDeclaration = StyleManager.getStyleDeclaration("HexColorInput");
-			if(!styleDeclaration)
-			{
-				styleDeclaration = new CSSStyleDeclaration();
-			}
-			
-			styleDeclaration.defaultFactory = function():void
-			{
-				this.backgroundColor = 0xffffff;
-				//other styles are based on the framework defaults
-			};
-			
-			StyleManager.setStyleDeclaration("HexColorInput", styleDeclaration, false);
-		}
-		initializeStyles();
-		
-	//--------------------------------------
 	//  Constructor
 	//--------------------------------------
 	
