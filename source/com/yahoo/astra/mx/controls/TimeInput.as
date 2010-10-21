@@ -44,7 +44,7 @@ package com.yahoo.astra.mx.controls
 	/**
 	 * If true, the hours value will always be displayed with two digits.
 	 * 
-	 * @default true
+	 * @default false
 	 */
 	[Style(name="displayTwoDigitHoursValue", type="Boolean", inherit="no")]
 
