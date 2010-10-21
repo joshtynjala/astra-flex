@@ -5,13 +5,14 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 package com.yahoo.astra.mx.controls.colorPickerClasses
 {
 	import flash.display.Bitmap;
-	import flash.events.MouseEvent;
-	
-	import mx.core.UIComponent;
-	import mx.events.ColorPickerEvent;
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
+	
+	import mx.core.IFactory;
+	import mx.core.UIComponent;
+	import mx.events.ColorPickerEvent;
 
 	//--------------------------------------
 	//  Events
@@ -111,6 +112,33 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				this.invalidateProperties();
 				this.invalidateSize();
 				this.invalidateDisplayList();
+			}
+		}
+		
+		/**
+		 * @private
+		 * Storage for the displayObjectFactory property.
+		 */
+		private var _displayObjectFactory:IFactory;
+		
+		/**
+		 * Instead of setting <code>displayObject</code> with an instance,
+		 * you can pass in a factory to create the display object.
+		 */
+		public function get displayObjectFactory():IFactory
+		{
+			return this._displayObjectFactory;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set displayObjectFactory(value:IFactory):void
+		{
+			this._displayObjectFactory = value;
+			if(this._displayObjectFactory)
+			{
+				this.displayObject = this._displayObjectFactory.newInstance();
 			}
 		}
 		
