@@ -4,7 +4,6 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 */
 ﻿package com.yahoo.astra.mx.controls.colorPickerClasses
 {
-	import com.yahoo.astra.animation.Animation;
 	import com.yahoo.astra.mx.core.yahoo_mx_internal;
 	import com.yahoo.astra.utils.ColorUtil;
 	import com.yahoo.astra.utils.HSBColor;
@@ -19,9 +18,7 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 	import mx.core.UIComponent;
 	import mx.events.ColorPickerEvent;
 	import mx.events.FlexEvent;
-	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
-	import mx.styles.StyleManager;
 	import mx.styles.StyleProxy;
 
 	use namespace yahoo_mx_internal;
@@ -400,13 +397,9 @@ The copyrights embodied in the content of this file are licensed under the BSD (
 			position.x -= this.selectionIndicator.width / 2;
 			position.y -= this.selectionIndicator.height / 2;
 			
-			if(this.dropDownMode || !this.selectionIndicatorPositionInitialized)
-			{
-				this.selectionIndicator.x = position.x;
-				this.selectionIndicator.y = position.y;
-				this.selectionIndicatorPositionInitialized = true;
-			}
-			else Animation.create(this.selectionIndicator, 150, {x: position.x, y: position.y});
+			this.selectionIndicator.x = position.x;
+			this.selectionIndicator.y = position.y;
+			this.selectionIndicatorPositionInitialized = true;
 		}
 		
 		/**
