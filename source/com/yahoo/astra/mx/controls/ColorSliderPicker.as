@@ -214,6 +214,8 @@ package com.yahoo.astra.mx.controls
 		/**
 		 * The color space specifies how many sliders will be displayed
 		 * and which component each slider will represent.
+		 * 
+		 * @see com.yahoo.astra.utils.ColorSpace
 		 */
 		public function get colorSpace():String
 		{
