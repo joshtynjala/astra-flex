@@ -387,12 +387,14 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 */
 		public function set direction(value:String):void
 		{
-			if(this._direction != value)
+			if(this._direction == value)
 			{
-				this._direction = value;
-				this.directionChanged = true;
-				this.invalidateDisplayList();
+				return;
 			}
+			this._direction = value;
+			this.directionChanged = true;
+			this.invalidateSize();
+			this.invalidateDisplayList();
 		}
 		
 		/**
@@ -448,6 +450,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			if(!this.thumb1)
 			{
 				this.thumb1 = new this.thumbClass();
+				this.thumb1.setStyle("invertThumbDirection", true);
 				this.thumb1.styleName = new StyleProxy(this, thumbStyleFilter);
 				this.thumb1.addEventListener(MouseEvent.MOUSE_DOWN, thumbMouseDownHandler);
 				this.addChild(this.thumb1);
@@ -515,6 +518,11 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		{
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			
+			if(this.directionChanged)
+			{
+				this.thumbsInitialized = false;
+			}
+			
 			this.graphics.clear();
 			
 			var thumbSize:Number = this.getStyle("thumbSize");
@@ -524,51 +532,28 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			if(this.direction == "vertical")
 			{
 				this.thumb1.setActualSize(oppositeSize, Math.min(thumbSize, unscaledWidth / 2));
-				this.thumb1.x = this.thumb1.height;
-				if(this.directionChanged)
-				{
-					this.thumb1.y = 0;
-					this.directionChanged = false;
-				}
-				this.thumb1.rotation = 90;
-				this.thumb1.setStyle("invertThumbDirection", false);
+				this.thumb1.x = 0;
+				this.thumb1.rotation = 270;
 				
 				this.thumb2.setActualSize(oppositeSize, Math.min(thumbSize, unscaledWidth / 2));
-				this.thumb2.x = unscaledWidth;
-				if(this.directionChanged)
-				{
-					this.thumb2.y = 0;
-					this.directionChanged = false;
-				}
-				this.thumb2.rotation = 90;
-				this.thumb2.setStyle("invertThumbDirection", true);
+				this.thumb2.x = unscaledWidth - this.thumb2.height;
+				this.thumb2.rotation = 270;
 			}
-			else
+			else //horizontal
 			{
 				this.thumb1.setActualSize(oppositeSize, Math.min(thumbSize, unscaledHeight / 2));
-				if(this.directionChanged)
-				{
-					this.thumb1.x = 0;
-					this.directionChanged = false;
-				}
 				this.thumb1.y = 0;
 				this.thumb1.rotation = 0;
-				this.thumb1.setStyle("invertThumbDirection", true);
 				
 				this.thumb2.setActualSize(oppositeSize, Math.min(thumbSize, unscaledHeight / 2));
-				if(this.directionChanged)
-				{
-					this.thumb2.x = 0;
-					this.directionChanged = false;
-				}
 				this.thumb2.y = unscaledHeight - this.thumb2.height;
 				this.thumb2.rotation = 0;
-				this.thumb2.setStyle("invertThumbDirection", false);
 			}
 
 			this.drawGradient();
 			
 			this.positionThumbs();
+			this.directionChanged = false;
 		}
 		
 		/**
@@ -693,7 +678,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				position = 1 - position;
 				position = position * (unscaledHeight - metrics.top - metrics.bottom);
 				
-				var yPosition:Number = metrics.top - (thumb1.width / 2) + position;
+				var yPosition:Number = metrics.top + (thumb1.width / 2) + position;
 				if(this.isDraggingThumb || !this.thumbsInitialized)
 				{
 					this.thumb1.y = this.thumb2.y = yPosition;

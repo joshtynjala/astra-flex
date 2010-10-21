@@ -23,6 +23,17 @@ package com.yahoo.astra.mx.controls
 	use namespace yahoo_mx_internal;
 	
 	//--------------------------------------
+	//  Styles
+	//--------------------------------------
+	
+	/**
+	 * The direction of the sliders, either <code>"vertical"</code> or <code>"horizontal"</code>.
+	 * 
+	 * @default "vertical"
+	 */
+	[Style(name="sliderDirection", type="String", inherit="no")]
+	
+	//--------------------------------------
 	//  Events
 	//--------------------------------------
 	
@@ -51,7 +62,7 @@ package com.yahoo.astra.mx.controls
 	/**
 	 * A set of color sliders representing the components in a colorspace.
 	 * 
-	 * @see com.yahoo.astra.mx.controls.ColorSlider
+	 * @see com.yahoo.astra.mx.controls.colorPickerClasses.ColorSlider
 	 * 
 	 * @author Josh Tynjala
 	 */
@@ -216,6 +227,7 @@ package com.yahoo.astra.mx.controls
 		 * and which component each slider will represent.
 		 * 
 		 * @see com.yahoo.astra.utils.ColorSpace
+		 * @default ColorSpace.RGB
 		 */
 		public function get colorSpace():String
 		{
@@ -236,6 +248,43 @@ package com.yahoo.astra.mx.controls
 				this.invalidateSize();
 				this.invalidateDisplayList();
 			}
+		}
+		
+		/**
+		 * @private
+		 * Flag indicating that the liveDragging property has changed.
+		 */
+		protected var liveDraggingChanged:Boolean = false;
+		
+		/**
+		 * @private
+		 * Storage for the liveDragging property.
+		 */
+		private var _liveDragging:Boolean = false;
+		
+		[Bindable]
+		/**
+		 * If true, the selectedColor property will update during drag
+		 * operations. If false, it will only update after the mouse button
+		 * is released.
+		 */
+		public function get liveDragging():Boolean
+		{
+			return this._liveDragging;
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set liveDragging(value:Boolean):void
+		{
+			if(this._liveDragging == value)
+			{
+				return;
+			}
+			this._liveDragging = value;
+			this.liveDraggingChanged = true;
+			this.invalidateProperties();
 		}
 		
 		/**
@@ -325,6 +374,7 @@ package com.yahoo.astra.mx.controls
 			for(var i:int = 0; i < sliderCount; i++)
 			{
 				var slider:ColorSlider = ColorSlider(this.sliders[i]);
+				slider.liveDragging = this.liveDragging;
 				slider.colorSpace = this.colorSpace;
 				slider.selectedColor = this.selectedColor;
 				slider.selectedHSBColor = this.selectedHSBColor;
@@ -417,6 +467,7 @@ package com.yahoo.astra.mx.controls
 				for(var i:int = 0; i < difference; i++)
 				{
 					var slider:ColorSlider = new ColorSlider();
+					slider.liveDragging = this._liveDragging;
 					slider.styleName = new StyleProxy(this, this.sliderStyleFilter);
 					slider.addEventListener(ColorPickerEvent.CHANGE, sliderChangeHandler);
 					slider.addEventListener(ColorPickerEvent.ITEM_ROLL_OVER, sliderRollOverHandler);
