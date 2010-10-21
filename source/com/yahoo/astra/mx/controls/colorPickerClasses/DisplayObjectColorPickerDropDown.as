@@ -39,6 +39,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	 */
 	[Event(name="itemRollOut", type="mx.events.ColorPickerEvent")]
 
+	[DefaultProperty("displayObject")]
 	/**
 	 * A drop-down with a DisplayObject whose pixels are used for selection for the DropDownColorPicker control.
 	 * 
