@@ -75,6 +75,13 @@ package com.yahoo.astra.mx.controls
 	 */
 	[Style(name="useTwelveHourFormat", type="Boolean", inherit="no")]
 	
+	/**
+	 * If true, the hours value will always be displayed with two digits.
+	 * 
+	 * @default false
+	 */
+	[Style(name="displayTwoDigitHoursValue", type="Boolean", inherit="no")]
+	
 	//-- stepper styles
 	
 	/**
@@ -339,9 +346,10 @@ package com.yahoo.astra.mx.controls
 		 */
 		private var _timeInputStyleFilters:Object = 
 		{    
-		    "useTwelveHourFormat" : "useTwelveHourFormat",        
+		    "useTwelveHourFormat" : "useTwelveHourFormat",     
 		    "showAMPM" : "showAMPM",        
 		    "showSeconds" : "showSeconds",
+			"displayTwoDigitHoursValue" : "displayTwoDigitHoursValue",
 		    
 		    //from NumericStepper:
 	        "backgroundAlpha" : "backgroundAlpha",
