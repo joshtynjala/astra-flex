@@ -1,8 +1,9 @@
 h1. Astra Flex Components
 
-Originally created by Yahoo! Inc.
-Forked by Josh Tynjala.
+Forked from version 1.4 by Josh Tynjala
 
-Since Yahoo! has no plans to update the Astra projects anymore (Source: http://tech.groups.yahoo.com/group/ydn-flash/message/2296), and the most recent release of the Flex components don't work in Flex 4, I decided to fork the project. As one of the original developers of Astra, I worked at Yahoo! from 2006-2008 and developed many of these components personally. As you can imagine, I know most of the source code rather well, and you can expect any changes I make to be of equal quality.
+Since Yahoo! has no plans to update the Astra projects (Source: http://tech.groups.yahoo.com/group/ydn-flash/message/2296), and their most recent release of the Flex components doesn't work with Flex 4, I decided to fork the project and make the necessary changes. I worked as an employee at Yahoo! from 2006-2008, and I am one of the original developers of the Astra components. As you can imagine, that means that I understand most of the source code rather well. Rest assured, I intend to uphold the same standards of quality that I tried to achieve with the original releases of the Astra Flex components.
 
-Please note: I have no long-term plans for maintaining or adding the Astra Flex components beyond making the existing code work in Flex 4. If you have feature requests or need a bug fixed, you may create an issue or vote on an existing one, but I cannot guarantee that I will be able to respond promptly. Contributors are welcome.
+Please note: I have no long-term plans for maintaining or adding to the Astra Flex components beyond ensuring that the existing code works correctly in Flex 4. If you have feature requests or need any bugs fixed, you may create an issue or vote on an existing one, but I cannot guarantee that I will be able to respond promptly. That said, contributors are certainly welcome, and I'm happy to consider changes that anyone wishes to submit.
+
+*Important:* The respository is neither owned, maintained, nor endorsed by Yahoo! Inc.
