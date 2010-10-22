@@ -44,6 +44,8 @@ package com.yahoo.astra.mx.controls
 	[AccessibilityClass(implementation="com.yahoo.astra.mx.accessibility.IPv4AddressInputAccImpl")]
 	[DefaultBindingProperty(source="value", destination="value")]
 
+	[DefaultProperty("value")]
+	
 	/**
 	 * An advanced TextInput variation for entering an IPv4 address.
 	 * 
