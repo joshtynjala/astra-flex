@@ -41,7 +41,7 @@ package com.yahoo.astra.net
 		 */
 		public function toString():String
 		{
-			return this.bytes[0] + "." + this.bytes[1] + "." + this.bytes[2] + "." + this.bytes[3];
+			return this.value;
 		}
 		
 		/**
@@ -125,6 +125,22 @@ package com.yahoo.astra.net
 				this.clear();
 			}
 			this._bytes = value;
+		}
+		
+		/**
+		 * The String representation of the IPv4Address.
+		 */
+		public function get value():String
+		{
+			return this.bytes[0] + "." + this.bytes[1] + "." + this.bytes[2] + "." + this.bytes[3];
+		}
+		
+		/**
+		 * @private
+		 */
+		public function set value(value:String):void
+		{
+			this.parse(value);
 		}
 		
 	//--------------------------------------
