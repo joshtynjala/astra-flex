@@ -6,6 +6,7 @@ package com.yahoo.astra.mx.controls
 {
 	import com.yahoo.astra.mx.controls.colorPickerClasses.ColorPlane;
 	import com.yahoo.astra.mx.controls.colorPickerClasses.ColorSlider;
+	import com.yahoo.astra.mx.controls.colorPickerClasses.IColorPicker;
 	import com.yahoo.astra.mx.core.yahoo_mx_internal;
 	import com.yahoo.astra.utils.CMYColor;
 	import com.yahoo.astra.utils.ColorSpace;
@@ -49,12 +50,12 @@ package com.yahoo.astra.mx.controls
 	/**
 	 * ColorPlane and ColorSlider controls combined to represent a full colorspace.
 	 * 
-	 * @see com.yahoo.astra.mx.controls.ColorPlane
-	 * @see com.yahoo.astra.mx.controls.ColorSlider
+	 * @see com.yahoo.astra.mx.controls.colorPickerClasses.ColorPlane
+	 * @see com.yahoo.astra.mx.controls.colorPickerClasses.ColorSlider
 	 * 
 	 * @author Josh Tynjala
 	 */
-	public class ColorPlaneAndSliderPicker extends UIComponent implements IFocusManagerComponent
+	public class ColorPlaneAndSliderPicker extends UIComponent implements IColorPicker, IFocusManagerComponent
 	{
 		
 	//--------------------------------------

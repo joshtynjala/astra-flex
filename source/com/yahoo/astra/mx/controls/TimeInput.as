@@ -681,12 +681,12 @@ package com.yahoo.astra.mx.controls
 
 		
 		/**
-		 * @inheritDoc
+		 * @private
 		 */	
 		public static var createAccessibilityImplementation:Function;
 		
  		/**
-		 * @inheritDoc
+		 * @private
 		 */
 		 override protected function initializeAccessibility():void
 		{

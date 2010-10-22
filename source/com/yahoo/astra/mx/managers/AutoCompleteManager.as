@@ -1428,7 +1428,7 @@ public class AutoCompleteManager extends EventDispatcher
      *  to determine the label for display as well as for filtering.
      *  
      * <p>Generally, you can use the <code>labelField</code> property to 
-     * display the item that you want, instead of using a function.
+     * display the item that you want, instead of using a function.</p>
      *
      *  <p>This function takes a single parameter, the item in the data provider 
      *  that you wish to use, and and returns a String based on that item.</p>

@@ -8,8 +8,12 @@
 	<property file="./build.local.properties"/>
 	<property file="./build.properties"/>
 	
+	<tstamp>
+		<format property="date.year" pattern="yyyy"/>
+	</tstamp>
+	
 	<target name="build" depends="prepare,build-lib,cleanup"/>
-	<target name="build-all" depends="prepare,build-lib,build-examples,cleanup"/>
+	<target name="build-all" depends="prepare,build-lib,build-documentation,build-examples,cleanup"/>
 	
 	<target name="prepare">
 		<!-- delete old output -->
@@ -43,6 +47,18 @@
 			<arg line="--include-stylesheet defaults.css ${source.output}/defaults.css"/>
 			<arg line="--external-library-path+='${flexframework.lib}'"/>
 			<arg line="--output '${build.output}/${library.shortName}.swc'"/>
+		</java>
+	</target>
+	
+	<target name="build-documentation">
+		<java jar="${asdoc}" fork="true" failonerror="true">
+			<arg line="+flexlib='${flexframework.root}'"/>
+			<arg line="--source-path '${source}'"/>
+			<arg line="--doc-sources '${source}'"/>
+			<arg line="--footer 'Copyright ${date.year} ${author.name}. All rights reserved.'"/>
+			<arg line="--main-title '${library.name}'"/>
+			<arg line="--window-title '${library.name}'"/>
+			<arg line="--output '${docs.output}'"/>
 		</java>
 	</target>
 	
