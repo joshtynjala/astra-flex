@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Copyright (c) 2010 Josh Tynjala.  All rights reserved.  
+	The copyrights embodied in the content of this file are licensed under the
+	BSD (revised) open source license.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:yahoo="http://www.yahoo.com/astra/2006/mxml"
+	minWidth="760" minHeight="480">
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup id="header" top="10" left="10" gap="2">
+		<s:Label text="ColorSliderPicker Control" fontSize="24"/>
+		<s:Label text="Astra Flex Components" fontSize="14"/>
+	</s:VGroup>
+	
+	<s:Group width="560" top="65" horizontalCenter="0">
+		<yahoo:ColorSliderPicker id="colorPicker" left="0" verticalCenter="0"
+			change="colorPicker_changeHandler(event)"/>
+		
+		<mx:Form top="0" right="0" bottom="0" width="50%">
+			<mx:FormItem label="Color Space" toolTip="Changes the meaning of each slider to correspond to an individual component in a color space.">
+				<s:DropDownList id="colorSpaceList" selectedIndex="0" requireSelection="true"
+					change="colorSpaceList_changeHandler(event)">
+					<s:ArrayList>
+						<fx:Object label="RGB" value="{ColorSpace.RGB}"/>
+						<fx:Object label="HSB" value="{ColorSpace.HSB}"/>
+						<fx:Object label="CMY" value="{ColorSpace.CMY}"/>
+						<fx:Object label="CMYK" value="{ColorSpace.CMYK}"/>
+					</s:ArrayList>
+				</s:DropDownList>
+			</mx:FormItem>
+			<mx:FormItem label="Color" toolTip="The selected color.">
+				<yahoo:HexColorInput id="colorInput" selectedColor="#000000"
+					change="colorInput_changeHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem label="Slider Direction" toolTip="The direction of the sliders.">
+				<s:DropDownList id="directionList" selectedIndex="0" requireSelection="true"
+					change="directionList_changeHandler(event)">
+					<s:ArrayList>
+						<fx:Object label="Vertical" value="vertical"/>
+						<fx:Object label="Horizontal" value="horizontal"/>
+					</s:ArrayList>
+				</s:DropDownList>
+			</mx:FormItem>
+			<mx:FormItem label="Live Dragging" toolTip="If true, the selectedColor property will change in real time as the sliders are dragged. If false, the selectColor property will only change when the slider thumb is released.">
+				<s:CheckBox id="liveDraggingCheck" selected="false"
+					change="liveDraggingCheck_changeHandler(event)"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Group>
+	
+	<fx:Script>
+	<![CDATA[
+		import com.yahoo.astra.utils.ColorSpace;
+		
+		import mx.events.ColorPickerEvent;
+		
+		import spark.events.IndexChangeEvent;
+		
+		protected function colorSpaceList_changeHandler(event:Event):void
+		{
+			this.colorPicker.colorSpace = this.colorSpaceList.selectedItem.value;
+		}
+		
+		protected function colorInput_changeHandler(event:Event):void
+		{
+			this.colorPicker.selectedColor = this.colorInput.selectedColor;
+		}
+
+		protected function colorPicker_changeHandler(event:ColorPickerEvent):void
+		{
+			this.colorInput.selectedColor = this.colorPicker.selectedColor;
+		}
+
+		protected function directionList_changeHandler(event:IndexChangeEvent):void
+		{
+			this.colorPicker.setStyle("sliderDirection", this.directionList.selectedItem.value);
+		}
+
+		protected function liveDraggingCheck_changeHandler(event:Event):void
+		{
+			this.colorPicker.liveDragging = this.liveDraggingCheck.selected;
+		}
+
+	]]>
+	</fx:Script>
+</s:Application>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Copyright (c) 2010 Josh Tynjala.  All rights reserved.  
+	The copyrights embodied in the content of this file are licensed under the
+	BSD (revised) open source license.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:yahoo="http://www.yahoo.com/astra/2006/mxml"
+	minWidth="760" minHeight="480">
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup id="header" top="10" left="10" gap="2">
+		<s:Label text="TimeStepper Control" fontSize="24"/>
+		<s:Label text="Astra Flex Components" fontSize="14"/>
+	</s:VGroup>
+	
+	<s:Group width="560" top="{header.height}" horizontalCenter="0">
+		<yahoo:TimeStepper id="timeStepper" left="0" verticalCenter="0"/>
+		
+		<mx:Form top="0" right="0" bottom="0" width="50%">
+			<mx:FormItem label="Show Seconds" toolTip="Shows or hides the seconds field. Seconds are still stored in the Date value, but they cannot be edited.">
+				<s:CheckBox id="showSecondsCheck" selected="true" change="showSecondsCheck_changeHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem label="Show AM/PM" toolTip="Shows or hides the AM/PM field. If useTwelveHourFormat is false, this has no effect.">
+				<s:CheckBox id="showAMPMCheck" selected="true" change="showAMPMCheck_changeHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem label="Use 12-Hour Format" toolTip="Hours are 1-12 AM and 1-12 PM, if true. Hours are 0-23 if false.">
+				<s:CheckBox id="useTwelveHourFormatCheck" selected="true" change="useTwelveHourFormatCheck_changeHandler(event)"/>
+			</mx:FormItem>
+			<mx:FormItem label="Always Display Hours with 2-Digits" toolTip="Hours 1, 2, 3... will display as 01, 02, 03...">
+				<s:CheckBox id="displayTwoDigitHoursValueCheck" selected="false" change="displayTwoDigitHoursValueCheck_changeHandler(event)"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Group>
+	
+	<fx:Script>
+	<![CDATA[
+		
+		protected function showSecondsCheck_changeHandler(event:Event):void
+		{
+			this.timeStepper.setStyle("showSeconds", this.showSecondsCheck.selected);
+		}
+		
+		protected function showAMPMCheck_changeHandler(event:Event):void
+		{
+			this.timeStepper.setStyle("showAMPM", this.showAMPMCheck.selected);
+		}
+		
+		protected function useTwelveHourFormatCheck_changeHandler(event:Event):void
+		{
+			this.timeStepper.setStyle("useTwelveHourFormat", this.useTwelveHourFormatCheck.selected);
+		}
+
+		protected function displayTwoDigitHoursValueCheck_changeHandler(event:Event):void
+		{
+			this.timeStepper.setStyle("displayTwoDigitHoursValue", this.displayTwoDigitHoursValueCheck.selected);
+		}
+
+	]]>
+	</fx:Script>
+</s:Application>

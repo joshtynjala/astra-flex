@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Copyright (c) 2010 Josh Tynjala.  All rights reserved.  
+	The copyrights embodied in the content of this file are licensed under the
+	BSD (revised) open source license.
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:mx="library://ns.adobe.com/flex/mx"
+	xmlns:yahoo="http://www.yahoo.com/astra/2006/mxml"
+	minWidth="760" minHeight="480"
+	creationComplete="creationCompleteHandler(event)">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup id="header" top="10" left="10" gap="2">
+		<s:Label text="IPv4AddressInput Control" fontSize="24"/>
+		<s:Label text="Astra Flex Components" fontSize="14"/>
+	</s:VGroup>
+	
+	<s:HGroup width="560" top="65" horizontalCenter="0" horizontalAlign="center">
+		<s:VGroup horizontalAlign="center">
+			<yahoo:IPv4AddressInput>
+				<yahoo:IPv4Address value="192.168.1.1"/>
+			</yahoo:IPv4AddressInput>
+			<s:Label text="Made with MXML"/>
+		</s:VGroup>
+		<s:VGroup id="actionScriptContainer" horizontalAlign="center">
+			<s:Label text="Made with ActionScript"/>
+		</s:VGroup>
+	</s:HGroup>
+	
+	<fx:Script>
+	<![CDATA[
+		import com.yahoo.astra.net.IPv4Address;
+		
+		import mx.events.FlexEvent;
+
+		private function creationCompleteHandler(event:FlexEvent):void
+		{
+			var dynamicInput:IPv4AddressInput = new IPv4AddressInput();
+			dynamicInput.value = new IPv4Address("127.0.0.1");
+			
+			//this also works:
+			//dynamicInput.value = "127.0.0.1";
+			
+			this.actionScriptContainer.addElementAt(dynamicInput, 0);
+		}
+	]]>
+	</fx:Script>
+</s:Application>
