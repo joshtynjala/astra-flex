@@ -15,19 +15,32 @@
 		<!-- delete old output -->
 		<delete dir="${output}" includeemptydirs="true"/>
 		<mkdir dir="${output}"/>
+		
+		<!-- copy required source files -->
+		<copy overwrite="true" todir="${source.output}">
+			<fileset dir="${source}"/>
+		</copy>		
+		
+		<!-- copy extra included files -->
+		<copy overwrite="true" todir="${output}">
+			<fileset dir="${basedir}">
+				<include name="manifest.xml"/>
+				<include name="license.txt"/>
+			</fileset>
+		</copy>
 	</target>
 
 	<target name="cleanup">
 	</target>
 	
 	<target name="build-lib">
-		<java jar="${compc}" fork="true" failonerror="true">
+		<java jar="${compc}" dir="${output}" fork="true" failonerror="true">
 			<arg line="+flexlib='${flexframework.root}'"/>
-			<arg line="--namespace+=${library.mxmlNamespace},manifest.xml"/>
-			<arg line="--source-path+='source'"/>
+			<arg line="--namespace+=${library.mxmlNamespace},${output}/manifest.xml"/>
+			<arg line="--source-path+='${source.output}'"/>
 			<arg line="--include-namespaces+=${library.mxmlNamespace}"/>
 			<arg line="--include-classes+=com.yahoo.astra.mx.AstraFlexDependencies"/>
-			<arg line="--include-stylesheet defaults.css source/defaults.css"/>
+			<arg line="--include-stylesheet defaults.css ${source.output}/defaults.css"/>
 			<arg line="--external-library-path+='${flexframework.lib}'"/>
 			<arg line="--output '${build.output}/${library.shortName}.swc'"/>
 		</java>
