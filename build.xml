@@ -9,7 +9,7 @@
 	<property file="./build.properties"/>
 	
 	<target name="build" depends="prepare,build-lib,cleanup"/>
-	<!-- TODO: add build-all to create documentation and examples -->
+	<target name="build-all" depends="prepare,build-lib,build-examples,cleanup"/>
 	
 	<target name="prepare">
 		<!-- delete old output -->
@@ -46,4 +46,36 @@
 		</java>
 	</target>
 	
+	<target name="build-examples">
+		<ant antfile="${examples}/ColorPlaneAndSliderPickerExplorer/build.xml" target="build">
+			<property name="basedir" value="${examples}/ColorPlaneAndSliderPickerExplorer"/>
+			<property name="output" value="${examples.output}/ColorPlaneAndSliderPickerExplorer"/>
+			<property name="libs" value="${build.output}"/>
+		</ant>
+		<ant antfile="${examples}/ColorSliderPickerExplorer/build.xml" target="build">
+			<property name="basedir" value="${examples}/ColorSliderPickerExplorer"/>
+			<property name="output" value="${examples.output}/ColorSliderPickerExplorer"/>
+			<property name="libs" value="${build.output}"/>
+		</ant>
+		<ant antfile="${examples}/DropDownColorPickerExample/build.xml" target="build">
+			<property name="basedir" value="${examples}/DropDownColorPickerExample"/>
+			<property name="output" value="${examples.output}/DropDownColorPickerExample"/>
+			<property name="libs" value="${build.output}"/>
+		</ant>
+		<ant antfile="${examples}/IPv4AddressInputExample/build.xml" target="build">
+			<property name="basedir" value="${examples}/IPv4AddressInputExample"/>
+			<property name="output" value="${examples.output}/IPv4AddressInputExample"/>
+			<property name="libs" value="${build.output}"/>
+		</ant>
+		<ant antfile="${examples}/TimeInputExplorer/build.xml" target="build">
+			<property name="basedir" value="${examples}/TimeInputExplorer"/>
+			<property name="output" value="${examples.output}/TimeInputExplorer"/>
+			<property name="libs" value="${build.output}"/>
+		</ant>
+		<ant antfile="${examples}/TimeStepperExplorer/build.xml" target="build">
+			<property name="basedir" value="${examples}/TimeStepperExplorer"/>
+			<property name="output" value="${examples.output}/TimeStepperExplorer"/>
+			<property name="libs" value="${build.output}"/>
+		</ant>
+	</target>
 </project>

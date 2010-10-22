@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="example" default="build">
+
+	<property file="../../sdk.properties"/>
+	
+	<!-- 
+	These property values are only used for local builds.
+	The main build script will override them for a full build.
+	-->
+	<property name="project.name" value="ColorSliderPickerExplorer"/>
+	<property name="output" location="${basedir}/output"/>
+	<property name="libs" location="../../output/astra-flex/build"/>
+	
+	<target name="build" depends="prepare,build-app,cleanup"/>
+	
+	<target name="prepare">
+		<!-- copy the files required for building to the output directory -->
+		<copy overwrite="true" todir="${output}">
+			<fileset dir="${basedir}">
+			
+				<!-- main source files -->
+				<include name="${project.name}.mxml"/>
+								
+				<!-- supporting files -->
+				<include name="${project.name}.html"/>
+				<include name="playerProductInstall.swf"/>
+				<include name="scripts/swfobject.js"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="build-app">
+		<java jar="${mxmlc}" fork="true" failonerror="true">
+			<arg line="+flexlib='${flexframework.root}'"/>
+			<arg line="--use-network=false"/>
+			<arg line="--library-path+='${libs}'"/>
+			<arg line="--output '${output}/${project.name}.swf'"/>
+			<arg line="'${output}/${project.name}.mxml'"/>
+		</java>
+	</target>
+	
+	<target name="cleanup">
+		<!-- does nothing at the moment -->
+	</target>
+</project>
