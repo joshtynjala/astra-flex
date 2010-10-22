@@ -7,6 +7,7 @@
 	<component id="IPv4AddressInput" class="com.yahoo.astra.mx.controls.IPv4AddressInput"/>
 	<component id="TimeInput" class="com.yahoo.astra.mx.controls.TimeInput"/>
 	<component id="TimeStepper" class="com.yahoo.astra.mx.controls.TimeStepper"/>
+	<component id="IPv4Address" class="com.yahoo.astra.net.IPv4Address"/>
 	<component id="AdvancedColorPickerDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.AdvancedColorPickerDropDown"/>
 	<component id="AdvancedHSBColorWheelPicker" class="com.yahoo.astra.mx.controls.colorPickerClasses.AdvancedHSBColorWheelPicker"/>
 	<component id="BaseColorPickerDropDown" class="com.yahoo.astra.mx.controls.colorPickerClasses.BaseColorPickerDropDown"/>
