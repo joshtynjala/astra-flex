@@ -410,7 +410,7 @@ package com.yahoo.astra.mx.controls
 			PopUpManager.addPopUp(this.picker, this.parent, false);
 			
 			//determine if the drop down should open on the top or bottom
-			if(position.y + this.height + dropDownGap + this.picker.height > this.systemManager.screen.height && position.y > (this.height + this.picker.height))
+			if(position.y + this.height + dropDownGap + this.picker.height > this.screen.height)
 			{
 				//open up
 				startY = -this.picker.height / this.scaleY;
@@ -423,24 +423,44 @@ package com.yahoo.astra.mx.controls
 			}
 			
 			//determine if the drop down should be aligned to the left or right
-			if (position.x + this.picker.width > this.systemManager.screen.width && position.x > (this.width + this.picker.width))
+			if(position.x + this.picker.width > this.screen.width)
 			{
 				//align to right edge
 				position.x -= (this.picker.width - this.width);
 			}
+			
+			//finally, if the drop down is still off-screen, nudge it to fit,
+			//if possible
+			if(position.y < this.screen.top)
+			{
+				position.y += (this.screen.top - position.y);
+			}
+			else if(position.y + this.picker.height > this.screen.bottom)
+			{
+				position.y -= (position.y + this.picker.height - this.screen.bottom);
+			}
+			
+			if(position.x < this.screen.left)
+			{
+				position.x += (this.screen.left - position.x);
+			}
+			else if(this.picker.x + this.picker.width > this.screen.right)
+			{
+				position.x -= (position.x + this.picker.width - this.screen.right);
+			}
         	
         	this.picker.x = position.x;
         	this.picker.y = position.y;
-			this.picker.addEventListener(ColorPickerEvent.CHANGE, pickerChangeHandler);
-			this.picker.addEventListener(ColorPickerEvent.ITEM_ROLL_OVER, pickerRollOverHandler); 
-			this.picker.addEventListener(ColorPickerEvent.ITEM_ROLL_OUT, pickerRollOutHandler);
-			this.stage.addEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownHandler, false, 0, true);
+			this.picker.addEventListener(ColorPickerEvent.CHANGE, picker_changeHandler);
+			this.picker.addEventListener(ColorPickerEvent.ITEM_ROLL_OVER, picker_rollOverHandler); 
+			this.picker.addEventListener(ColorPickerEvent.ITEM_ROLL_OUT, picker_rollOutHandler);
+			this.stage.addEventListener(MouseEvent.MOUSE_DOWN, stage_mouseDownHandler, false, 0, true);
         	
         	this.clearAnimation();
         	
 			this._animation = new Animation(openDuration, {y: startY}, {y: endY});
-			this._animation.addEventListener(AnimationEvent.UPDATE, showHideUpdateHandler);
-			this._animation.addEventListener(AnimationEvent.COMPLETE, showHideCompleteHandler);
+			this._animation.addEventListener(AnimationEvent.UPDATE, showHideAnimation_updateHandler);
+			this._animation.addEventListener(AnimationEvent.COMPLETE, showHideAnimation_completeHandler);
 			this.showingDropdown = true;
 		}
 		
@@ -462,10 +482,10 @@ package com.yahoo.astra.mx.controls
 			if(this.picker.parent)
 			{
 				//hide it
-				this.stage.removeEventListener(MouseEvent.MOUSE_DOWN, stageMouseDownHandler);
-				this.picker.removeEventListener(ColorPickerEvent.CHANGE, pickerChangeHandler);
-				this.picker.removeEventListener(ColorPickerEvent.ITEM_ROLL_OVER, pickerRollOverHandler); 
-				this.picker.removeEventListener(ColorPickerEvent.ITEM_ROLL_OUT, pickerRollOutHandler);
+				this.stage.removeEventListener(MouseEvent.MOUSE_DOWN, stage_mouseDownHandler);
+				this.picker.removeEventListener(ColorPickerEvent.CHANGE, picker_changeHandler);
+				this.picker.removeEventListener(ColorPickerEvent.ITEM_ROLL_OVER, picker_rollOverHandler); 
+				this.picker.removeEventListener(ColorPickerEvent.ITEM_ROLL_OUT, picker_rollOutHandler);
 				
 				//opened down
 				if(this.picker.y > position.y + this.height)
@@ -481,8 +501,8 @@ package com.yahoo.astra.mx.controls
         	this.clearAnimation();
         	
 			this._animation = new Animation(closeDuration, {y: startY}, {y: endY});
-			this._animation.addEventListener(AnimationEvent.UPDATE, showHideUpdateHandler);
-			this._animation.addEventListener(AnimationEvent.COMPLETE, showHideCompleteHandler);
+			this._animation.addEventListener(AnimationEvent.UPDATE, showHideAnimation_updateHandler);
+			this._animation.addEventListener(AnimationEvent.COMPLETE, showHideAnimation_completeHandler);
 			this.showingDropdown = false;
 			this.picker.enabled = false;
 		}
@@ -517,7 +537,7 @@ package com.yahoo.astra.mx.controls
 		 * @private
 		 * If the picker's selected color changes, update our selected color.
 		 */
-		protected function pickerChangeHandler(event:ColorPickerEvent):void
+		protected function picker_changeHandler(event:ColorPickerEvent):void
 		{
 			this.hideDropDown(event);
 			this.selectedColor = event.color;
@@ -529,7 +549,7 @@ package com.yahoo.astra.mx.controls
 		 * @private
 		 * Update the preview color on rollover, if applicable.
 		 */
-		protected function pickerRollOverHandler(event:ColorPickerEvent):void
+		protected function picker_rollOverHandler(event:ColorPickerEvent):void
 		{
 			if(this.viewer is IColorPreviewViewer)
 			{
@@ -544,7 +564,7 @@ package com.yahoo.astra.mx.controls
 		 * @private
 		 * Clear the preview color on rollout, if applicable.
 		 */
-		protected function pickerRollOutHandler(event:ColorPickerEvent):void
+		protected function picker_rollOutHandler(event:ColorPickerEvent):void
 		{
 			this.clearPreview();
 		}
@@ -556,12 +576,7 @@ package com.yahoo.astra.mx.controls
 		protected function keyDownHandler2(event:KeyboardEvent):void
 		{	
 			// If a the editable field currently has focus, it is handling
-        // all arrow keys. We shouldn't also scroll this selection.
-        /* trace(event.target);
-        trace(event.target == picker);
-        trace(event.target == viewer);
-        if (event.target == picker)
-           return; */
+			// all arrow keys. We shouldn't also scroll this selection.
 			
 			if(this.showingDropdown)
 			{
@@ -577,7 +592,6 @@ package com.yahoo.astra.mx.controls
 			{
 				this.showDropDown(event);
 			}
-			
 		}
 		
 		/**
@@ -620,8 +634,8 @@ package com.yahoo.astra.mx.controls
 		{
         	if(this._animation)
         	{
-				this._animation.removeEventListener(AnimationEvent.UPDATE, showHideUpdateHandler);
-				this._animation.removeEventListener(AnimationEvent.COMPLETE, showHideCompleteHandler);
+				this._animation.removeEventListener(AnimationEvent.UPDATE, showHideAnimation_updateHandler);
+				this._animation.removeEventListener(AnimationEvent.COMPLETE, showHideAnimation_completeHandler);
 				this._animation = null;
         	}
 		}
@@ -630,7 +644,7 @@ package com.yahoo.astra.mx.controls
 		 * @private
 		 * When the animation is running, the picker's scrollrect is updated.
 		 */
-		private function showHideUpdateHandler(event:AnimationEvent):void
+		private function showHideAnimation_updateHandler(event:AnimationEvent):void
 		{
 			this.picker.scrollRect = new Rectangle(0, event.parameters.y, this.picker.width, this.picker.height); 
 		}
@@ -639,9 +653,9 @@ package com.yahoo.astra.mx.controls
 		 * @private
 		 * When the animation is complete, we handle drop down events 
 		 */
-		private function showHideCompleteHandler(event:AnimationEvent):void
+		private function showHideAnimation_completeHandler(event:AnimationEvent):void
 		{
-			this.showHideUpdateHandler(event);
+			this.showHideAnimation_updateHandler(event);
 			this.clearAnimation();
 			
 			//closing
@@ -664,7 +678,7 @@ package com.yahoo.astra.mx.controls
 		 * Toggle the drop down if the user clicks on the stage outside the
 		 * drop down while it is visible.
 		 */
-		private function stageMouseDownHandler(event:MouseEvent):void
+		private function stage_mouseDownHandler(event:MouseEvent):void
 		{
 			var target:DisplayObject = DisplayObject(event.target);
 			if(event.target != this && !this.contains(target) && !DisplayObjectContainer(this.picker).contains(DisplayObject(target)))
@@ -679,11 +693,10 @@ package com.yahoo.astra.mx.controls
 			}
 		}
 		
-	//--------------------------------------------------------------------------
-	//
+	//--------------------------------------
 	//  Accessibility
-	//
-	//--------------------------------------------------------------------------		
+	//--------------------------------------
+		
 		/**
 		 * @private
 		 */	
