@@ -410,20 +410,22 @@ package com.yahoo.astra.mx.controls
 			PopUpManager.addPopUp(this.picker, this.parent, false);
 			
 			//determine if the drop down should open on the top or bottom
-			if(position.y + this.height + dropDownGap + this.picker.height > this.screen.height)
+			//prefer the bottom
+			if(position.y + this.height + dropDownGap + this.picker.height > this.screen.height && picker.height < this.screen.height)
 			{
 				//open up
-				startY = -this.picker.height / this.scaleY;
+				startY = -this.picker.height;
 				position.y -= dropDownGap + this.picker.height;
 			}
 			else //open down
 			{
-				startY = this.picker.height / this.scaleY;
+				startY = this.picker.height;
 				position.y += this.height + dropDownGap;
 			}
 			
 			//determine if the drop down should be aligned to the left or right
-			if(position.x + this.picker.width > this.screen.width)
+			//prefer the right
+			if(position.x + this.picker.width > this.screen.width && picker.width < this.screen.width)
 			{
 				//align to right edge
 				position.x -= (this.picker.width - this.width);
@@ -444,7 +446,7 @@ package com.yahoo.astra.mx.controls
 			{
 				position.x += (this.screen.left - position.x);
 			}
-			else if(this.picker.x + this.picker.width > this.screen.right)
+			else if(position.x + this.picker.width > this.screen.right)
 			{
 				position.x -= (position.x + this.picker.width - this.screen.right);
 			}
@@ -490,11 +492,11 @@ package com.yahoo.astra.mx.controls
 				//opened down
 				if(this.picker.y > position.y + this.height)
 				{
-					endY = this.picker.height / this.scaleY;	
+					endY = this.picker.height;	
 				}
 				else //opened up
 				{
-					endY = -this.picker.height / this.scaleY;
+					endY = -this.picker.height;
 				}
 			}
 
