@@ -8,11 +8,15 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import com.yahoo.astra.mx.skins.halo.ColorViewerSkin;
 	
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+	import flash.display.InteractiveObject;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import mx.controls.ButtonPhase;
 	import mx.core.IFlexDisplayObject;
 	import mx.core.UIComponent;
+	import mx.events.FlexEvent;
 	import mx.managers.IFocusManagerComponent;
 	import mx.styles.CSSStyleDeclaration;
 	import mx.styles.ISimpleStyleClient;
@@ -96,6 +100,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOverHandler);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
 			this.addEventListener(MouseEvent.CLICK, clickHandler);
+			this.addEventListener(FlexEvent.BUTTON_DOWN, clickHandler);
 		}
 		
 	//--------------------------------------
@@ -103,7 +108,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	//--------------------------------------
 	
 		/**
-		 * @see com.yahoo.astra.utils.HSBColor
+		 * @private
 		 * The current skin for this phase.
 		 */
 		protected var currentSkin:IFlexDisplayObject;
@@ -278,6 +283,17 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				}
 				this.currentSkin = child;
 			}
+			
+			//I don't know why these are needed, but spark skins will not work
+			//with this component unless the mouse is disabled completely.
+			if(this.currentSkin is InteractiveObject)
+			{
+				InteractiveObject(this.currentSkin).mouseEnabled = false;
+			}
+			if(this.currentSkin is DisplayObjectContainer)
+			{
+				DisplayObjectContainer(this.currentSkin).mouseChildren = false;
+			}
 			this.currentSkin.setActualSize(unscaledWidth, unscaledHeight);
 		}
 		
@@ -328,7 +344,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 * @private
 		 * Requests a color when clicked.
 		 */
-		protected function clickHandler(event:MouseEvent):void
+		protected function clickHandler(event:Event):void
 		{
 			this.dispatchEvent(new ColorRequestEvent(ColorRequestEvent.REQUEST_COLOR, false, false, this.color));
 		}

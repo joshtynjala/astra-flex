@@ -25,7 +25,6 @@ yahoo|DropDownColorPicker
 
 .yahoo-DropDownColorPicker-viewerStyleName
 {
-	skin: ClassReference("com.yahoo.astra.mx.skins.halo.EditableColorViewerSkin");
 }
 
 .yahoo-DropDownColorPicker-pickerStyleName
@@ -145,7 +144,7 @@ yahoo|ColorWheelPicker
 
 yahoo|DefaultColorViewer
 {
-	skin: ClassReference("com.yahoo.astra.mx.skins.halo.ColorViewerSkin");
+	skin: ClassReference("mx.skins.spark.ColorPickerSkin");
 }
 
 yahoo|HexColorInput
