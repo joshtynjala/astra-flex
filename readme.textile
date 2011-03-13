@@ -6,4 +6,10 @@ Since Yahoo! has no plans to update the Astra projects (Source: http://tech.grou
 
 Please note: I have no long-term plans for maintaining or adding to the Astra Flex components beyond ensuring that the existing code works correctly in Flex 4. If you have feature requests or need any bugs fixed, you may create an issue or vote on an existing one, but I cannot guarantee that I will be able to respond promptly. That said, contributors are certainly welcome, and I'm happy to consider changes that anyone wishes to submit.
 
-*Important:* The respository is neither owned, maintained, nor endorsed by Yahoo! Inc.
+h2. Disclaimer
+
+The respository is neither owned, maintained, nor endorsed by Yahoo! Inc.
+
+h2. Usage
+
+Please be sure to download the SWC rather than using the source code directly. Astra Flex now has a *defaults.css* for maximum Flex 4 compatibility. The default styles and skins only get included automatically when you link the SWC into your Flex application. If you need to make changes the the source, you should "build a new Astra Flex SWC.":https://github.com/joshtynjala/astra-flex/wiki/Building-Astra-Flex-from-Source
