@@ -1,4 +1,4 @@
-Copyright (c) 2010, Josh Tynjala 
+Copyright (c) 2011, Josh Tynjala 
 
 Redistribution and use of this software in source and binary forms, with or
 without modification, are permitted provided that the following conditions are

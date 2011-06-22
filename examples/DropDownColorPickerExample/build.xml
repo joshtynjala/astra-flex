@@ -28,6 +28,11 @@
 				<include name="scripts/swfobject.js"/>
 			</fileset>
 		</copy>
+		<copy todir="${output}">
+			<fileset dir="${flexframework.rsls}">
+				<include name="*.swz"/>
+			</fileset>
+		</copy>
 	</target>
 	
 	<target name="build-app">

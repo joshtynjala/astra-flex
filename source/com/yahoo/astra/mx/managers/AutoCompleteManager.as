@@ -24,9 +24,9 @@ import mx.controls.List;
 import mx.controls.TextInput;
 import mx.controls.listClasses.IListItemRenderer;
 import mx.controls.listClasses.ListBase;
-import mx.core.Application;
 import mx.core.ClassFactory;
 import mx.core.Container;
+import mx.core.FlexGlobals;
 import mx.core.IFactory;
 import mx.events.DropdownEvent;
 import mx.events.FlexEvent;
@@ -123,7 +123,7 @@ public class AutoCompleteManager extends EventDispatcher
 	    
 	    _sharedObject = SharedObject.getLocal(sharedObjectPath, shareData?"/":null);
    
-		Application.application.addEventListener(FlexEvent.APPLICATION_COMPLETE, createListenersForTargets);
+		FlexGlobals.topLevelApplication.addEventListener(FlexEvent.APPLICATION_COMPLETE, createListenersForTargets);
         
 	}
 
@@ -769,7 +769,7 @@ public class AutoCompleteManager extends EventDispatcher
     {
         
         //TODO: optimize 
-        if(Application.application.initialized)
+        if(FlexGlobals.topLevelApplication.initialized)
         {
         	removeListenersForTargets();	
         }

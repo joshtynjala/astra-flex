@@ -100,6 +100,7 @@ yahoo|BaseMultiFieldInput
 	backgroundColor: #ffffff;
 	backgroundDisabledColor: #dddddd;
 	textAlign: center;
+	borderSkin: ClassReference("mx.skins.spark.TextInputBorderSkin");
 }
 
 yahoo|ColorPlane
@@ -108,6 +109,7 @@ yahoo|ColorPlane
 	selectionIndicatorSize: 10;
 	contentBackgroundColor: #ffffff;
 	contentBackgroundAlpha: 0;
+	borderSkin: ClassReference("mx.skins.spark.BorderSkin");
 }
 
 yahoo|ColorSelectionViewer
@@ -123,6 +125,7 @@ yahoo|ColorSlider
 	thumbSize: 10;
 	contentBackgroundColor: #ffffff;
 	contentBackgroundAlpha: 0;
+	borderSkin: ClassReference("mx.skins.spark.BorderSkin");
 }
 
 yahoo|ColorSliderDropDown
@@ -150,6 +153,7 @@ yahoo|DefaultColorViewer
 yahoo|HexColorInput
 {
 	backgroundColor: #ffffff;
+	borderSkin: ClassReference("mx.skins.spark.TextInputBorderSkin");
 }
 
 yahoo|HexColorViewer

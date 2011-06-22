@@ -108,8 +108,7 @@ package com.yahoo.astra.mx.skins.halo
 			var fillAlphas:Array = getStyle("fillAlphas");
 			var fillColors:Array = getStyle("fillColors");
 			
-			//TODO: when dropping Flex 3 support, change to this.styleManager
-			StyleManager.getColorNames(fillColors);
+			this.styleManager.getColorNames(fillColors);
 			var themeColor:uint = getStyle("themeColor");
 			
 			// Derivative styles.
