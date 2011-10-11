@@ -7,6 +7,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
@@ -112,15 +113,43 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			if(this._selectedColor != value)
 			{
 				this._selectedColor = value;
-				this.invalidateDisplayList();
+				this.focusedIndex = this._colorList.indexOf(this._selectedColor);
 				this.dispatchEvent(new FlexEvent(FlexEvent.VALUE_COMMIT));
 			}
 		}
 		
+		private var _focusedIndex:int = -1;
+
+		[Bindable(event="focusedIndexChange")]
 		/**
 		 * The color that is highlighted.
 		 */
-		public var focusedIndex:int = -1;
+		public function get focusedIndex():int
+		{
+			return this._focusedIndex;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set focusedIndex(value:int):void
+		{
+			if(this._focusedIndex !== value)
+			{
+				if(this._focusedIndex >= 0)
+				{
+					this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.ITEM_ROLL_OUT, false, false, this._focusedIndex, this._colorList[this._focusedIndex]));
+				}
+				this._focusedIndex = value;
+				if(this._focusedIndex >= 0)
+				{
+					this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.ITEM_ROLL_OVER, false, false, this._focusedIndex, this._colorList[this._focusedIndex]));
+				}
+				this.invalidateDisplayList();
+				this.dispatchEvent(new Event("focusedIndexChange"));
+			}
+		}
+
 		
 		/**
 		 * @private
@@ -237,7 +266,10 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 */
 		protected function updateSwatches():void
 		{
-			if(!this._colorList) return;
+			if(!this._colorList)
+			{
+				return;
+			}
 			
 			var columnCount:int = this.getStyle("columnCount");
 			var horizontalGap:Number = this.getStyle("horizontalGap");
@@ -269,8 +301,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				}
 			}
 			
-			var selectedIndex:int = this._colorList.indexOf(this.selectedColor);
-			this.highlightSwatch(selectedIndex);
+			this.highlightSwatch(this._focusedIndex);
 		}
 		
 		/**
@@ -286,7 +317,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			var swatch:Sprite = new Sprite();
 			swatch.addEventListener(MouseEvent.CLICK, swatchClickHandler);
 			swatch.addEventListener(MouseEvent.ROLL_OVER, swatchRollOverHandler);
-			//swatch.addEventListener(MouseEvent.ROLL_OUT, swatchRollOutHandler);
+			swatch.addEventListener(MouseEvent.ROLL_OUT, swatchRollOutHandler);
 			this.addChildAt(swatch, 0);
 			return swatch;
 		}
@@ -303,7 +334,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				var swatch:Shape = Shape(this.swatchCache.pop());
 				swatch.removeEventListener(MouseEvent.CLICK, swatchClickHandler);
 				swatch.removeEventListener(MouseEvent.ROLL_OVER, swatchRollOverHandler);
-				//swatch.removeEventListener(MouseEvent.ROLL_OUT, swatchRollOutHandler);
+				swatch.removeEventListener(MouseEvent.ROLL_OUT, swatchRollOutHandler);
 				this.removeChild(swatch);
 			}
 		}
@@ -313,13 +344,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 * Puts the swatch highlight over the specified swatch.
 		 */
 		protected function highlightSwatch(index:int):void
-		{	
-			if(this.focusedIndex >= 0)
-			{
-				this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.ITEM_ROLL_OUT, false, false, this.focusedIndex, this._colorList[this.focusedIndex]));
-			}
-			
-			this.focusedIndex = -1;
+		{
 			if(this.swatchHighlight && index >= 0)
 			{
 				var swatch:Sprite = this.swatches[index] as Sprite;
@@ -331,10 +356,11 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				this.swatchHighlight.x = swatch.x;
 				this.swatchHighlight.y = swatch.y;
 				this.swatchHighlight.visible = true;
-				this.focusedIndex = index;
-				this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.ITEM_ROLL_OVER, false, false, this.focusedIndex, this._colorList[this.focusedIndex]));
 			}
-			else this.swatchHighlight.visible = false;
+			else
+			{
+				this.swatchHighlight.visible = false;
+			}
 		}
 		
 	//--------------------------------------
@@ -347,9 +373,16 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 */
 		protected function swatchRollOverHandler(event:MouseEvent):void
 		{
-			var index:int = this.swatches.indexOf(event.currentTarget);
-			var color:uint = this._colorList[index] as uint;
-			this.highlightSwatch(index);
+			this.focusedIndex = this.swatches.indexOf(event.currentTarget);
+		}
+		
+		/**
+		 * @private
+		 * Updates the highlight on swatch rollout and notifies listeners.
+		 */
+		protected function swatchRollOutHandler(event:MouseEvent):void
+		{
+			this.focusedIndex = -1;
 		}
 		
 		/**
@@ -375,7 +408,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			if(event.keyCode == Keyboard.ENTER)
 			{
 				this.selectedColor = this._colorList[this.focusedIndex];
-				this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.CHANGE, false, false, this.focusedIndex, this.selectedColor));
+				this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.CHANGE, false, false, this._focusedIndex, this._selectedColor));
 				return;
 			}
 				
@@ -387,41 +420,33 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			switch(event.keyCode)
 			{
 				case Keyboard.UP:
-					index = this.focusedIndex - columnCount < 0 ?
-							   (rowCount - 1) * columnCount + this.focusedIndex + 1 : this.focusedIndex - columnCount;		   
-					this.highlightSwatch(index);
+					index = (this._focusedIndex - columnCount < 0) ?
+							   ((rowCount - 1) * columnCount + this._focusedIndex + 1) : (this._focusedIndex - columnCount);
 					break;
 				case Keyboard.DOWN:
-					index = this.focusedIndex + columnCount > this._colorList.length ?
-							   (this.focusedIndex - 1) - (rowCount - 1) * columnCount : this.focusedIndex + columnCount;
-					this.highlightSwatch(index);
+					index = (this._focusedIndex + columnCount > this._colorList.length) ?
+							   ((this._focusedIndex - 1) - (rowCount - 1) * columnCount) : (this._focusedIndex + columnCount);
 					break;
 				case Keyboard.LEFT:
-					index = this.focusedIndex < 1 ? this._colorList.length - 1 : this.focusedIndex - 1;
-					this.highlightSwatch(index);
+					index = this._focusedIndex < 1 ? this._colorList.length - 1 : this._focusedIndex - 1;
 					break;
 				case Keyboard.RIGHT:
-					index = this.focusedIndex >= this._colorList.length - 1 ? 0 : this.focusedIndex + 1;
-					this.highlightSwatch(index);
+					index = this._focusedIndex >= this._colorList.length - 1 ? 0 : this._focusedIndex + 1;
 					break;
 				case Keyboard.PAGE_UP:
-					index = this.focusedIndex - currentRow * columnCount;
-					this.highlightSwatch(index);
+					index = this._focusedIndex - currentRow * columnCount;
 					break;
 				case Keyboard.PAGE_DOWN:
-					index = this.focusedIndex + (rowCount - 1) * columnCount - currentRow * columnCount;
-					this.highlightSwatch(index);
+					index = this._focusedIndex + (rowCount - 1) * columnCount - currentRow * columnCount;
 					break;
 				case Keyboard.HOME:
-					index = this.focusedIndex - (this.focusedIndex - currentRow * columnCount);
-					this.highlightSwatch(index);
+					index = this._focusedIndex - (this._focusedIndex - currentRow * columnCount);
 					break;
 				case Keyboard.END:
-					index = this.focusedIndex + (currentRow * columnCount - this.focusedIndex) + (columnCount - 1);
-					this.highlightSwatch(index);
+					index = this._focusedIndex + (currentRow * columnCount - this._focusedIndex) + (columnCount - 1);
 					break;
 			}
-			this.highlightSwatch(index);
+			this.focusedIndex = index;
 		}
 	}
 }

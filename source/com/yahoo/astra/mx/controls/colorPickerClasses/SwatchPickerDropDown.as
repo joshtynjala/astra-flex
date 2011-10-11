@@ -185,6 +185,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 */
 		protected function swatchPickerRollOutHandler(event:ColorPickerEvent):void
 		{
+			this.previewColor = this.selectedColor;
 			this.dispatchEvent(new ColorPickerEvent(ColorPickerEvent.ITEM_ROLL_OUT, false, false, event.index, event.color));
 		}
 		
