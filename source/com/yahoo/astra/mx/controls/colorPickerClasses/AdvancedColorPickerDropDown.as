@@ -28,7 +28,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	import mx.styles.StyleProxy;
 	
 	use namespace yahoo_mx_internal;
-	
+
 	/**
 	 * A drop-down with a ColorPlane, a ColorSlider, and a set of TextInputs
 	 * representing values in the HSB and RGB colorspaces.
@@ -42,10 +42,10 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 	public class AdvancedColorPickerDropDown extends BaseColorPickerDropDown
 	{
 		
-	//--------------------------------------
-	//  Static Properties
-	//--------------------------------------
-		
+		//--------------------------------------
+		//  Static Properties
+		//--------------------------------------
+
 		/**
 		 * @private
 		 * The default width of the viewer.
@@ -76,10 +76,10 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		 */
 		private static const DEFAULT_PLANE_AND_SLIDER_HEIGHT:Number = 250;
 		
-	//--------------------------------------
-	//  Constructor
-	//--------------------------------------
-	
+		//--------------------------------------
+		//  Constructor
+		//--------------------------------------
+
 		/**
 		 * Constructor.
 		 */
@@ -88,9 +88,9 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			super();
 		}
 		
-	//--------------------------------------
-	//  Properties
-	//--------------------------------------
+		//--------------------------------------
+		//  Properties
+		//--------------------------------------
 		
 		/**
 		 * The ColorPlaneAndSlider instance.
@@ -184,6 +184,26 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			this._previewHSBColor = ColorUtil.uintToHSB(this.previewColor);
 		}
 		
+
+		/**
+		 * @private
+		 * The control flag for displaying hue, saturation and brightness fields
+		 */
+		private var _hsb:Boolean = true;
+
+		[Bindable(eventType="hsbFlagChanged")]
+		public function get hsb():Boolean
+		{
+			return _hsb;
+		}
+
+		public function set hsb(hsb:Boolean):void
+		{
+			this._hsb = hsb;
+			dispatchEvent(new Event("hsbFlagChanged"));
+		}
+
+
 		/**
 		 * @private
 		 * Storage for the previewHSBColor property.
@@ -217,7 +237,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function get radioInputWidth():Number
 		{
 			var horizontalGap:Number = this.getStyle("horizontalGap");
-			return this.hueRadio.measuredWidth + horizontalGap + DEFAULT_INPUT_WIDTH;
+			return this.redRadio.measuredWidth + horizontalGap + DEFAULT_INPUT_WIDTH;
 		}
 		
 		/**
@@ -226,13 +246,13 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function get radioInputHeight():Number
 		{
 			var verticalGap:Number = this.getStyle("verticalGap");
-			return this.hueRadio.measuredHeight + this.saturationRadio.measuredHeight + this.brightnessRadio.measuredHeight +
+			return (this._hsb ? this.hueRadio.measuredHeight + this.saturationRadio.measuredHeight + this.brightnessRadio.measuredHeight : 0) +
 				this.redRadio.measuredHeight + this.greenRadio.measuredHeight + this.blueRadio.measuredHeight + 6 * verticalGap;
 		}
 		
-	//--------------------------------------
-	//  Protected Functions
-	//--------------------------------------
+		//--------------------------------------
+		//  Protected Functions
+		//--------------------------------------
 		
 		/**
 		 * @private
@@ -278,7 +298,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				//this.componentRadioGroup.addEventListener(Event.CHANGE, componentRadioChangeHandler);
 			}
 			
-			if(!this.hueRadio)
+			if(!this.hueRadio && _hsb)
 			{
 				this.hueRadio = new RadioButton();
 				this.hueRadio.focusEnabled = false;
@@ -290,7 +310,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				this.addChild(this.hueRadio);
 			}
 			
-			if(!this.saturationRadio)
+			if(!this.saturationRadio && _hsb)
 			{
 				this.saturationRadio = new RadioButton();
 				this.saturationRadio.focusEnabled = false;
@@ -301,7 +321,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 				this.addChild(this.saturationRadio);
 			}
 			
-			if(!this.brightnessRadio)
+			if(!this.brightnessRadio && _hsb)
 			{
 				this.brightnessRadio = new RadioButton();
 				this.brightnessRadio.focusEnabled = false;
@@ -496,29 +516,31 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			var radioX:Number = rightColumnX + (rightColumnWidth - radioInputWidth) / 2;
 			var radioY:Number = this.viewer.y + this.viewer.height + verticalGap;
 			
-			this.hueRadio.setActualSize(this.hueRadio.measuredWidth, this.hueRadio.measuredHeight);
-			this.hueRadio.x = radioX;
-			this.hueRadio.y = radioY;
-			this.hueInput.setActualSize(DEFAULT_INPUT_WIDTH, this.hueInput.measuredHeight);
-			this.hueInput.x = this.hueRadio.x + this.hueRadio.width + horizontalGap;
-			this.hueInput.y = radioY;
-			radioY += this.hueRadio.height + verticalGap;
-			
-			this.saturationRadio.setActualSize(this.saturationRadio.measuredWidth, this.saturationRadio.measuredHeight);
-			this.saturationRadio.x = radioX;
-			this.saturationRadio.y = radioY;
-			this.saturationInput.setActualSize(DEFAULT_INPUT_WIDTH, this.saturationInput.measuredHeight);
-			this.saturationInput.x = this.saturationRadio.x + this.saturationRadio.width + horizontalGap;
-			this.saturationInput.y = radioY;
-			radioY += this.saturationRadio.height + verticalGap;
-			
-			this.brightnessRadio.setActualSize(this.brightnessRadio.measuredWidth, this.brightnessRadio.measuredHeight);
-			this.brightnessRadio.x = radioX;
-			this.brightnessRadio.y = radioY;
-			this.brightnessInput.setActualSize(DEFAULT_INPUT_WIDTH, this.brightnessInput.measuredHeight);
-			this.brightnessInput.x = this.brightnessRadio.x + this.brightnessRadio.width + horizontalGap;
-			this.brightnessInput.y = radioY;
-			radioY += this.brightnessRadio.height + 2 * verticalGap;
+			if(_hsb){
+				this.hueRadio.setActualSize(this.hueRadio.measuredWidth, this.hueRadio.measuredHeight);
+				this.hueRadio.x = radioX;
+				this.hueRadio.y = radioY;
+				this.hueInput.setActualSize(DEFAULT_INPUT_WIDTH, this.hueInput.measuredHeight);
+				this.hueInput.x = this.hueRadio.x + this.hueRadio.width + horizontalGap;
+				this.hueInput.y = radioY;
+				radioY += this.hueRadio.height + verticalGap;
+
+				this.saturationRadio.setActualSize(this.saturationRadio.measuredWidth, this.saturationRadio.measuredHeight);
+				this.saturationRadio.x = radioX;
+				this.saturationRadio.y = radioY;
+				this.saturationInput.setActualSize(DEFAULT_INPUT_WIDTH, this.saturationInput.measuredHeight);
+				this.saturationInput.x = this.saturationRadio.x + this.saturationRadio.width + horizontalGap;
+				this.saturationInput.y = radioY;
+				radioY += this.saturationRadio.height + verticalGap;
+
+				this.brightnessRadio.setActualSize(this.brightnessRadio.measuredWidth, this.brightnessRadio.measuredHeight);
+				this.brightnessRadio.x = radioX;
+				this.brightnessRadio.y = radioY;
+				this.brightnessInput.setActualSize(DEFAULT_INPUT_WIDTH, this.brightnessInput.measuredHeight);
+				this.brightnessInput.x = this.brightnessRadio.x + this.brightnessRadio.width + horizontalGap;
+				this.brightnessInput.y = radioY;
+				radioY += this.brightnessRadio.height + 2 * verticalGap;
+			}
 			
 			this.redRadio.setActualSize(this.redRadio.measuredWidth, this.redRadio.measuredHeight);
 			this.redRadio.x = radioX;
@@ -532,7 +554,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			this.greenRadio.x = radioX;
 			this.greenRadio.y = radioY;
 			this.greenInput.setActualSize(DEFAULT_INPUT_WIDTH, this.greenInput.measuredHeight);
-			this.greenInput.x = this.greenRadio.x + this.greenRadio.width + horizontalGap;
+			this.greenInput.x = this.greenRadio.x + this.greenRadio.width + horizontalGap -1;
 			this.greenInput.y = radioY;
 			radioY += this.redRadio.height + verticalGap;
 			
@@ -545,10 +567,10 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			radioY += this.blueRadio.height + verticalGap;
 		}
 		
-	//--------------------------------------
-	//  Protected Event Handlers
-	//--------------------------------------
-	
+		//--------------------------------------
+		//  Protected Event Handlers
+		//--------------------------------------
+
 		/**
 		 * @private
 		 * Refresh the preview color if the ColorPlane or the ColorSlider changes.
