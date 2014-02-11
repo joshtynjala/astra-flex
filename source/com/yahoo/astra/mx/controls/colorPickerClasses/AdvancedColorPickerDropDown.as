@@ -203,6 +203,24 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 			dispatchEvent(new Event("hsbFlagChanged"));
 		}
 
+		/**
+		 * @private
+		 * The control flag for slider change when rgb or hsb input fields are selected
+		 */
+		private var _changeSlider:Boolean = true;
+
+		[Bindable(eventType="changeSliderChanged")]
+		public function get changeSlider():Boolean
+		{
+			return _changeSlider;
+		}
+
+		public function set changeSlider(changeSlider:Boolean):void
+		{
+			this._changeSlider = changeSlider;
+			dispatchEvent(new Event("changeSliderChanged"));
+		}
+
 
 		/**
 		 * @private
@@ -643,7 +661,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function hueInputFocusInHandler(event:FocusEvent):void
 		{
 			this.hueRadio.selected = true;
-			this.planeAndSlider.sliderComponent = this.hueRadio.value.toString();
+			if(changeSlider) this.planeAndSlider.sliderComponent = this.hueRadio.value.toString();
 		}
 
 		/**
@@ -654,7 +672,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function saturationInputFocusInHandler(event:FocusEvent):void
 		{
 			this.saturationRadio.selected = true;
-			this.planeAndSlider.sliderComponent = this.saturationRadio.value.toString();
+			if(changeSlider) this.planeAndSlider.sliderComponent = this.saturationRadio.value.toString();
 		}
 
 		/**
@@ -665,7 +683,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function brightnessInputFocusInHandler(event:FocusEvent):void
 		{
 			this.brightnessRadio.selected = true;
-			this.planeAndSlider.sliderComponent = this.brightnessRadio.value.toString();
+			if(changeSlider) this.planeAndSlider.sliderComponent = this.brightnessRadio.value.toString();
 		}
 
 		/**
@@ -676,7 +694,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function redInputFocusInHandler(event:FocusEvent):void
 		{
 			this.redRadio.selected = true;
-			this.planeAndSlider.sliderComponent = this.redRadio.value.toString();
+			if(changeSlider) this.planeAndSlider.sliderComponent = this.redRadio.value.toString();
 		}
 
 		/**
@@ -687,7 +705,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function greenInputFocusInHandler(event:FocusEvent):void
 		{
 			this.greenRadio.selected = true;
-			this.planeAndSlider.sliderComponent = this.greenRadio.value.toString();
+			if(changeSlider) this.planeAndSlider.sliderComponent = this.greenRadio.value.toString();
 		}
 
 		/**
@@ -698,7 +716,7 @@ package com.yahoo.astra.mx.controls.colorPickerClasses
 		protected function blueInputFocusInHandler(event:FocusEvent):void
 		{
 			this.blueRadio.selected = true;
-			this.planeAndSlider.sliderComponent = this.blueRadio.value.toString();
+			if(changeSlider) this.planeAndSlider.sliderComponent = this.blueRadio.value.toString();
 		}
 
 		/**
